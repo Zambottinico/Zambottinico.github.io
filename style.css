@@ -107,3 +107,9 @@ nav ul li a.active::after {
     background-color: var(--color-fuente);
   }
   
+
+  @media (min-width: 1400px) {
+    .texto-xxl {
+      font-size: 25px;
+    }
+  }  
