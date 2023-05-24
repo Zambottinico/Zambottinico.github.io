@@ -113,3 +113,14 @@ nav ul li a.active::after {
       font-size: 25px;
     }
   }  
+
+
+ 
+  
+.logo{
+    transition: transform 0.5s ease;
+}  
+.logo:active{
+    
+    transform: rotate(360deg);
+}
