@@ -308,6 +308,10 @@ let donadores = [
     {
         nombre:"lacunadelmbow",
         Donaciones: 25
+    },
+    {
+        nombre:"MANUEL LENDOS PINEDA",
+        Donaciones:32.81
     }
 ];
 
