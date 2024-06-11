@@ -1,136 +1,124 @@
-
 :root {
-    --fondo: #0f0f0f;
-    --fondo-footer: #1f1f1f;
-    --color-fuente: #ffffff;
-    --color-fuente2: #CCCCCC;
-    --color-gris-claro: #575656;
+  --fondo: #0f0f0f;
+  --fondo-footer: #1f1f1f;
+  --color-fuente: #ffffff;
+  --color-fuente2: #cccccc;
+  --color-gris-claro: #575656;
 }
 
-html{
-    scroll-behavior: smooth;
-    
+html {
+  scroll-behavior: smooth;
 }
 
-
-body::-webkit-scrollbar{
-    background-color: var(--fondo);
-    width: 8px;
+body::-webkit-scrollbar {
+  background-color: var(--fondo);
+  width: 8px;
 }
-body::-webkit-scrollbar-thumb{
-    background-color:var(--color-fuente2);
-    border-radius: 5px;
-    
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-fuente2);
+  border-radius: 5px;
 }
 
-body::-webkit-scrollbar-thumb:hover{
-    background-color: var(--color-gris-claro);
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gris-claro);
 }
 
-
-#particles-js{
-    position: fixed;
-    width: 100%;
-    height: 100vh;
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
 }
 
-p{
-    font-size: 17px;
+p {
+  font-size: 17px;
 }
 
-nav{
-    font-size: 20px;
+nav {
+  font-size: 20px;
 }
 
-.bg-light-gray{
-    background-color: var(--fondo-footer);
+.bg-light-gray {
+  background-color: var(--fondo-footer);
 }
-.bg-black{
-    background-color: var(--fondo);
+.bg-black {
+  background-color: var(--fondo);
 }
-.bg-gray{
-    background-color: var(--fondo-footer);
+.bg-gray {
+  background-color: var(--fondo-footer);
 }
-.bg-transparent{
-    background-color: #cccccc00;
-}
-
-.imgHome{
-    border-bottom-right-radius: 15px;
-border-top-right-radius: 15px;
-
-}
-footer a{
-    font-size: 22px !important;
+.bg-transparent {
+  background-color: #cccccc00;
 }
 
-
-.card{
-    transition: all 0.3s ease-in-out !important;
-    
+.imgHome {
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
 }
-.card:hover{
-    transition: all 0.1s ease-in-out !important;
-    transform: scale(1.1)!important;
-   
+footer a {
+  font-size: 22px !important;
 }
 
-.shadow{
-    box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77);
-    -webkit-box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77);
-    -moz-box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77); 
+.card {
+  transition: all 0.3s ease-in-out !important;
+}
+.card:hover {
+  transition: all 0.1s ease-in-out !important;
+  transform: scale(1.1) !important;
 }
 
-.shadow-p{
-    box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77);
-    -webkit-box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77);
-    -moz-box-shadow: 12px 9px 30px 0px rgba(0,0,0,0.77);
-    
+.shadow {
+  box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
 }
-.shadow-p:hover{
-    transform: scale(1.1);
+
+.shadow-p {
+  box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+}
+.shadow-p:hover {
+  transform: scale(1.1);
 }
 
 .center-vertical {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.not-style{
-    color: unset;
-			font-size: unset;
-			font-weight: unset;
-            text-decoration: none;
+.not-style {
+  color: unset;
+  font-size: unset;
+  font-weight: unset;
+  text-decoration: none;
 }
-.not-style:hover{
-    color:var(--color-fuente);
+.not-style:hover {
+  color: var(--color-fuente);
 }
-section[id]{
-    scroll-margin-top: 70px; 
+section[id] {
+  scroll-margin-top: 70px;
 }
 
 nav ul li a.active::after {
-    content: "";
-    display: block;
-    height: 2px;
-    background-color: var(--color-fuente);
+  content: "";
+  display: block;
+  height: 2px;
+  background-color: var(--color-fuente);
+}
+
+@media (min-width: 1400px) {
+  .texto-xxl {
+    font-size: 25px;
   }
-  
+}
 
-  @media (min-width: 1400px) {
-    .texto-xxl {
-      font-size: 25px;
-    }
-  }  
-
-
- 
-  
-.logo{
-    transition: transform 0.5s ease;
-}  
-.logo:active{
-    
-    transform: rotate(360deg);
+.logo {
+  transition: transform 0.5s ease;
+}
+.logo:active {
+  transform: rotate(360deg);
+}
+html.sr .load-hidden {
+  visibility: hidden;
 }
