@@ -61,10 +61,6 @@ footer a {
 .card {
   transition: all 0.3s ease-in-out !important;
 }
-.card:hover {
-  transition: all 0.1s ease-in-out !important;
-  transform: scale(1.1) !important;
-}
 
 .shadow {
   box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
@@ -76,9 +72,6 @@ footer a {
   box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
   -webkit-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
   -moz-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
-}
-.shadow-p:hover {
-  transform: scale(1.1);
 }
 
 .center-vertical {
@@ -106,7 +99,9 @@ nav ul li a.active::after {
   height: 2px;
   background-color: var(--color-fuente);
 }
-
+nav ul li a:hover {
+  font-weight: 500;
+}
 @media (min-width: 1400px) {
   .texto-xxl {
     font-size: 25px;
@@ -119,6 +114,7 @@ nav ul li a.active::after {
 .logo:active {
   transform: rotate(360deg);
 }
+
 html.sr .load-hidden {
   visibility: hidden;
 }
