@@ -67,8 +67,56 @@ nav {
   border-radius: 5px;
   margin-bottom: 10px;
 }
+#sectionHome {
+  display: flex;
+  align-items: center;
+}
+#sectionHome .container-fluid {
+  position: relative;
+  z-index: 99;
+}
+#sectionHome .container-fluid img {
+  height: 100%;
+}
 @media (max-width: 767px) {
   .img-experience {
     max-width: 200px;
   }
+}
+@media (max-width: 991px) {
+  #sectionHome {
+    background-color: green;
+    height: auto;
+    margin-top: 100px;
+  }
+  #sectionHome .container-fluid img {
+    border-radius: 5px;
+    height: auto;
+  }
+}
+
+.logo {
+  transition: transform 0.5s ease;
+}
+.logo:active {
+  transform: rotate(360deg);
+}
+
+html.sr .load-hidden {
+  visibility: hidden;
+}
+
+.shadow {
+  box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+}
+
+.shadow-p {
+  box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 12px 9px 30px 0px rgba(0, 0, 0, 0.77);
+}
+section[id] {
+  scroll-margin-top: 70px;
 }
