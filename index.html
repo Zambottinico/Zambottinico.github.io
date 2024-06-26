@@ -48,7 +48,13 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+        <label class="hamburger">
+          <input type="checkbox">
+          <svg viewBox="0 0 32 32">
+            <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+            <path class="line" d="M7 16 27 16"></path>
+          </svg>
+        </label>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
@@ -103,7 +109,7 @@
     </nav>
     <section id="sectionHome" class="load-hidden home">
       <div
-        class="container-fluid text-white  bg-gray rounded center-vertical shadow"
+        class="container-fluid text-white  bg-gray rounded center-vertical shadow rounded-6"
       >
         <div class="row">
           <div class="col-lg-7 p-3 ">
@@ -115,9 +121,9 @@
               En 2024, tuve mi primera experiencia profesional en Deinsa Global, donde apliqué mis conocimientos. Siempre busco aprender más y mejorar, con el objetivo de crear soluciones efectivas en el campo del desarrollo de software.
             </p>
               </div>
-          <div class="col-lg-5">
+          <div class="col-lg-5 col-home-img">
             <img
-              class="img img-fluid imgHome"
+              class="img img-fluid imgHome rounded-6"
               src="../img/fotoHome2.jpeg"
               alt=""
             />
@@ -171,12 +177,12 @@
         </div>
       </div>
     </section>
-    <div class="container  mt-5 mb-5 text-dark rowA load-hidden" >
+    <div class="container  mt-5 mb-5 text-dark " >
       <section id="section-Proyects">
         <h2 class="text-white text-center">Proyectos</h2>
 
       <div class="row mt-5 justify-content-around ">
-        <div class="col-12 col-md-6  col-sm-6 mb-4">
+        <div class="col-12 col-md-6  col-sm-6 mb-4 rowA load-hidden">
           <div class="card bg-light-gray text-white border-0 shadow-p">
             <img src="../Recursos/bar.png" class="card-img-top " alt="...">
             <div class="card-body ">
@@ -192,7 +198,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-sm-6 mb-4">
+        <div class="col-12 col-md-6 col-sm-6 mb-4 rowA load-hidden">
           <div class="card bg-light-gray text-white border-0 shadow-p">
             <img src="../img/cartas.png" class="card-img-top bg-black" alt="...">
             <div class="card-body">
