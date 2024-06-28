@@ -60,7 +60,7 @@ nav {
 }
 .items-container label {
   position: relative;
-  z-index: 9999;
+  z-index: 9;
   color: var(--color-fuente2);
   padding: 5px;
   font-size: 12px;
@@ -70,7 +70,7 @@ nav {
 
   --clr-font-main: hsla(0 0% 20% / 100);
   --btn-bg-1: rgb(104, 104, 104);
-  --btn-bg-2: rgb(49, 49, 49);
+  --btn-bg-2: rgb(66, 66, 66);
   --btn-bg-color: hsla(360 100% 100% / 1);
   --radii: 0.5em;
   background-size: 280% auto;
