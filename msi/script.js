@@ -5,6 +5,27 @@ const pregunta = document.getElementById("pregunta");
 const respuesta = document.getElementById("respuesta");
 const questionsBefore = [
   {
+    question: "Explique el modelo en cascada",
+    response: ``,
+  },
+  {
+    question: "Explique el modelo de prototipo",
+    response: ``,
+  },
+  {
+    question: "Explique el modelo en espiral",
+    response: ``,
+  },
+  {
+    question: "Que es una prueba de regresion",
+    response: `
+La prueba de regresión es un tipo de prueba de software que se realiza para verificar que los cambios recientes en el código del software no hayan introducido nuevos errores o afectado negativamente las funcionalidades existentes. Este tipo de prueba es crucial cuando se realizan modificaciones, como correcciones de errores, mejoras o adiciones de nuevas características, para asegurarse de que el software siga funcionando como se espera.`,
+  },
+  {
+    question: "Que es una prueba exploratoria",
+    response: `La prueba exploratoria es un enfoque de pruebas de software en el cual los testers exploran activamente el sistema sin seguir un conjunto predefinido de casos de prueba. Este método se basa en la experiencia, el conocimiento y la intuición del tester para identificar posibles problemas y errores en el software.`,
+  },
+  {
     question: "Para que usan la informacion las organizaciones?",
     response: `Aumentar el conocimiento del usuario: La información incrementa el conocimiento de quienes la utilizan.</br>
                 Reducir la incertidumbre de lo que no se conoce: Ayuda a disminuir la incertidumbre en la toma de decisiones al proporcionar datos relevantes.</br>
