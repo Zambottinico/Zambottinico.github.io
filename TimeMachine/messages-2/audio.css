@@ -188,7 +188,6 @@
   display: inline; /* Opcional: para mantener el comportamiento en línea del botón */
   cursor: pointer; /* Opcional: muestra el cursor como mano */
 }
-
 #nextSong {
   transform: rotate(0deg) !important;
 }
