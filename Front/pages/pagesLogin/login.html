@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="../../style.css" />
+    <link
+      rel="shortcut icon"
+      href="../../img/favicon.ico"
+      type="image/x-icon"
+    />
+    <title>Iniciar Sesión</title>
+  </head>
+  <body class="bgPattern">
+    <h1 class="text-center mt-3 enchanted h1" style="font-size: 90px">
+      Baraja Real
+    </h1>
+    <div class="container papiro paper-left mt-5">
+      <form id="form">
+        <div class="mb-3">
+          <label for="username" class="form-label">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+            maxlength="50"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+            maxlength="50"
+          />
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary" id="login">
+            Ingresar
+          </button>
+          <br />
+          <a href="../pagesLogin/crearCuenta.html">No tengo cuenta</a>
+        </div>
+      </form>
+      <button onclick="oauthSignIn()" class="btn btn-danger">
+        <i class="fab fa-google"></i> Iniciar sesión con Google
+      </button>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        const token = getAccessTokenFromUrl();
+        console.log(token);
+        if (token) sendTokenToBackend(token);
+
+        $("#form").validate();
+
+        $("#form").submit(function (event) {
+          btn = document.getElementById("login");
+          btn.disabled = true;
+          btn.innerHTML = `<div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                 </div> Cargando...`;
+          event.preventDefault();
+          if (!$("#form").valid()) return;
+
+          let login = {
+            Email: $("#username").val(),
+            Password: $("#password").val(),
+          };
+
+          $.ajax({
+            url: "https://3c80-190-96-112-182.ngrok-free.app/api/User/Login",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(login),
+            success: function (response) {
+              Cookies.set("claveSeguridad", JSON.stringify(response), {
+                expires: 30,
+              });
+              Cookies.set("username", login.Username, { expires: 30 });
+              window.location = "../pagesIndex/index.html";
+            },
+            error: function (error) {
+              console.error("Error en login:", error.responseText);
+              btn.disabled = false;
+              btn.innerHTML = "Iniciar sesión";
+            },
+          });
+        });
+      });
+
+      function oauthSignIn() {
+        var oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+
+        var params = {
+          client_id:
+            "935997935229-35qgapv1bibg8frh82mh31besh0jk3c6.apps.googleusercontent.com",
+          redirect_uri: "http://localhost:8080/pages/pagesLogin/login.html",
+          response_type: "id_token", // 🔥 Pedimos el ID Token en lugar del Access Token
+          scope: "openid email profile", // 🔥 Asegura que obtenemos email y perfil
+          nonce: "random_nonce_value", // 🔒 Protección contra ataques de repetición
+        };
+
+        var url = oauth2Endpoint + "?" + new URLSearchParams(params).toString();
+        window.location.href = url; // 🔄 Redirigir directamente
+      }
+
+      function getAccessTokenFromUrl() {
+        return new URLSearchParams(window.location.hash.substring(1)).get(
+          "id_token"
+        );
+      }
+
+      function sendTokenToBackend(accessToken) {
+        if (!accessToken) return;
+
+        $.ajax({
+          url: "https://3c80-190-96-112-182.ngrok-free.app/api/User/google",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ token: accessToken }),
+          success: function (response) {
+            Cookies.set("claveSeguridad", JSON.stringify(response), {
+              expires: 30,
+            });
+
+            window.location = "../pagesIndex/index.html";
+          },
+          error: function (error) {
+            console.error(
+              "Error al enviar token al backend:",
+              error.responseText
+            );
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

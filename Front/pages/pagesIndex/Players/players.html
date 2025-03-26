@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <link rel="stylesheet" href="../../../style.css" />
+    <link
+      rel="shortcut icon"
+      href="../../../img/favicon.ico"
+      type="image/x-icon"
+    />
+    <style>
+      .table {
+        background-color: transparent !important;
+      }
+
+      /* Anula el fondo de las filas */
+      .table tbody tr {
+        background-color: transparent;
+      }
+
+      /* Anula el fondo y los bordes de las celdas de encabezado */
+      .table th {
+        background-color: transparent;
+      }
+
+      /* Anula el fondo y los bordes de las celdas de datos */
+      .table tbody td {
+        background-color: transparent;
+      }
+      #goToMyPosition {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #007bff; /* Cambia el color si lo deseas */
+        color: white;
+        border: none;
+        border-radius: 50%; /* Hace que el botón sea redondo */
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      #goToMyPosition:hover {
+        background-color: #0056b3; /* Cambia el color al pasar el cursor */
+      }
+      #goToMyPosition a {
+        text-decoration: none;
+      }
+    </style>
+    <title>Jugadores</title>
+  </head>
+  <body class="bgPattern">
+    <nav class="navbar navbar-expand bg-dark text-white shadow">
+      <div class="container-fluid d-flex justify-content-center">
+        <div class="row">
+          <div class="col active">
+            <a href="../index.html" class="nav-link active">Juego</a>
+          </div>
+          <div class="col lined-bottom">
+            <a href="../Players/players.html" class="nav-link active"
+              >Jugadores</a
+            >
+          </div>
+          <div class="col">
+            <a href="../Profile/profile.html" class="nav-link active">Perfil</a>
+          </div>
+          <div class="col">
+            <a href="../Tienda/tienda.html" class="nav-link active">Tienda</a>
+          </div>
+          <div class="col-auto">
+            <a
+              href="../Acerca de/AcercaDe.html"
+              class="nav-link active"
+              id="NavCards"
+              >Acerca de</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <h1
+      class=""
+      id="goToMyPosition"
+      data-toggle="tooltip"
+      data-bs-placement="left"
+      title="Ir a mi posicion"
+    >
+      <a class=" p-2 text-white rounded" href="#localPlayer"
+        ><i class="fa fa-location-arrow"></i
+      ></a>
+    </h1>
+    <div class="container papiro paper-left mt-5">
+      <table id="table" class="table"></table>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="players.js"></script>
+  </body>
+</html>
