@@ -168,6 +168,7 @@
             Authorization: "Bearer " + cookieUser.token,
           },
           success: function (response) {
+            console.log(response);
             // Rellenar los campos con los datos obtenidos
             $("#id").val(response.id);
             $("#lifeRechargePrice").val(response.lifeRechargePrice);
