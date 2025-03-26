@@ -45,7 +45,7 @@ const DrawInfo = (game) => {
   description.text(game.lastCard.description);
   days.empty();
   days.append(
-    ` <img src="../../../img/items/vida.png" alt="" style="width: 30px;"> ${game.lives} <img src="../../../img/items/gold.png" alt="" style="width: 30px;">${game.gold}  <img src="../../../img/items/diamond.png" alt="" style="width: 30px;">${game.diamonds}<img class="ms-2" src="../../../img/items/day.png" alt="" style="width: 30px;">Dia: ${game.day}`
+    ` <img src="../../img/items/vida.png" alt="" style="width: 30px;"> ${game.lives} <img src="../../img/items/gold.png" alt="" style="width: 30px;">${game.gold}  <img src="../../img/items/diamond.png" alt="" style="width: 30px;">${game.diamonds}<img class="ms-2" src="../../img/items/day.png" alt="" style="width: 30px;">Dia: ${game.day}`
   );
   DrawStates(game);
 };
