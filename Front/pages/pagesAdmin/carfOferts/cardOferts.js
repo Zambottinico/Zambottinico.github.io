@@ -16,12 +16,12 @@ if (!cookieUser) {
 
 $(document).ready(function () {
   $.ajax({
-    url: "https://localhost:7116/api/Character/GetCharacters",
+    url: "https://3c80-190-96-112-182.ngrok-free.app/api/Character/GetCharacters",
     method: "GET",
     dataType: "json",
     headers: {
-      Authorization: "Bearer " + cookieUser.token,
-    },
+      Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"   },
     success: function (response) {
       console.log(response);
 
@@ -35,12 +35,12 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: "https://localhost:7116/api/cardoferts/all",
+    url: "https://3c80-190-96-112-182.ngrok-free.app/api/cardoferts/all",
     method: "GET",
     dataType: "json",
     headers: {
-      Authorization: "Bearer " + cookieUser.token,
-    },
+      Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"   },
     success: function (response) {
       console.log(response);
       ofertsList = response;
@@ -121,7 +121,7 @@ function eliminarOferta(id) {
   var clave = cookieUser.clave;
 
   $.ajax({
-    url: `https://localhost:7116/api/tienda/deleteCardOfert/${id}`,
+    url: `https://3c80-190-96-112-182.ngrok-free.app/api/tienda/deleteCardOfert/${id}`,
     type: "DELETE",
     contentType: "application/json",
     data: JSON.stringify({
@@ -129,8 +129,8 @@ function eliminarOferta(id) {
       clave: clave,
     }),
     headers: {
-      Authorization: "Bearer " + cookieUser.token,
-    },
+      Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"   },
     success: function (response) {
       alert("Oferta eliminada correctamente");
       location.reload();
@@ -187,12 +187,12 @@ document.getElementById("create").addEventListener("click", function () {
 
 // Función para realizar el POST
 function postOffer(offerData) {
-  fetch("https://localhost:7116/api/tienda/createCardOfert", {
+  fetch("https://3c80-190-96-112-182.ngrok-free.app/api/tienda/createCardOfert", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + cookieUser.token,
-    },
+      Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"   },
     body: JSON.stringify(offerData),
   })
     .then((response) => response.json())
@@ -209,12 +209,12 @@ function postOffer(offerData) {
 
 // Función para realizar el PUT
 function updateOffer(offerData) {
-  fetch(`https://localhost:7116/api/tienda/updateCardOfert`, {
+  fetch(`https://3c80-190-96-112-182.ngrok-free.app/api/tienda/updateCardOfert`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + cookieUser.token,
-    },
+      Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"   },
     body: JSON.stringify(offerData),
   })
     .then((response) => response.json())

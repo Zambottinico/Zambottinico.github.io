@@ -165,8 +165,8 @@
           url: "https://f017-190-96-112-182.ngrok-free.app/api/Game/config",
           type: "GET",
           headers: {
-            Authorization: "Bearer " + cookieUser.token,
-          },
+            Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"         },
           success: function (response) {
             console.log(response);
             // Rellenar los campos con los datos obtenidos
@@ -199,8 +199,8 @@
             contentType: "application/json",
             data: JSON.stringify(formData),
             headers: {
-              Authorization: "Bearer " + cookieUser.token,
-            },
+              Authorization:"Bearer " + cookieUser.token,
+    "ngrok-skip-browser-warning": "true"           },
             success: function (response) {
               alert("Datos actualizados correctamente.");
               console.log(response);
