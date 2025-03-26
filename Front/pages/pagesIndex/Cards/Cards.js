@@ -72,7 +72,7 @@ $(document).ready(function () {
     }
   }
   $.ajax({
-    url: "https://3c80-190-96-112-182.ngrok-free.app/api/Character/GetCharacters",
+    url: "https://f017-190-96-112-182.ngrok-free.app/api/Character/GetCharacters",
     method: "GET",
     dataType: "json",
     headers: {
@@ -142,7 +142,7 @@ $(document).ready(function () {
       console.log(JSON.stringify(jsonData));
 
       $.ajax({
-        url: "https://3c80-190-96-112-182.ngrok-free.app/api/Card/Post",
+        url: "https://f017-190-96-112-182.ngrok-free.app/api/Card/Post",
         method: "POST",
         dataType: "json",
         contentType: "application/json",

@@ -35,7 +35,7 @@ $(document).ready(function () {
 
   $.ajax({
     url:
-      "https://3c80-190-96-112-182.ngrok-free.app/api/User/GetUserById/" +
+      "https://f017-190-96-112-182.ngrok-free.app/api/User/GetUserById/" +
       cookieUser.id,
     method: "GET",
     dataType: "json",
@@ -60,7 +60,7 @@ $(document).ready(function () {
 
     if (data.maxLives != data.lives) {
       $.ajax({
-        url: "https://3c80-190-96-112-182.ngrok-free.app/api/Game/config",
+        url: "https://f017-190-96-112-182.ngrok-free.app/api/Game/config",
         method: "GET",
         dataType: "json",
         headers: {
@@ -94,7 +94,7 @@ $(document).ready(function () {
 
   $.ajax({
     url:
-      "https://3c80-190-96-112-182.ngrok-free.app/api/Character/GetCharactersByUserId/" +
+      "https://f017-190-96-112-182.ngrok-free.app/api/Character/GetCharactersByUserId/" +
       cookieUser.id,
     method: "GET",
     dataType: "json",

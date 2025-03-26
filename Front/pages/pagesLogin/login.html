@@ -88,7 +88,7 @@
           };
 
           $.ajax({
-            url: "https://3c80-190-96-112-182.ngrok-free.app/api/User/Login",
+            url: "https://f017-190-96-112-182.ngrok-free.app/api/User/Login",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(login),
@@ -134,7 +134,7 @@
         if (!accessToken) return;
 
         $.ajax({
-          url: "https://3c80-190-96-112-182.ngrok-free.app/api/User/google",
+          url: "https://f017-190-96-112-182.ngrok-free.app/api/User/google",
           method: "POST",
           contentType: "application/json",
           data: JSON.stringify({ token: accessToken }),

@@ -15,7 +15,7 @@ $(document).ready(function () {
   }
 
   $.ajax({
-    url: "https://3c80-190-96-112-182.ngrok-free.app/api/User/GetUsers",
+    url: "https://f017-190-96-112-182.ngrok-free.app/api/User/GetUsers",
     method: "GET",
     dataType: "json",
     headers: {

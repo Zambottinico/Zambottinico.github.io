@@ -40,7 +40,7 @@ $(document).ready(function () {
   console.log(jsonData);
   $.ajax({
     url:
-      "https://3c80-190-96-112-182.ngrok-free.app/api/User/GetUserById/" +
+      "https://f017-190-96-112-182.ngrok-free.app/api/User/GetUserById/" +
       cookieUser.id,
     method: "GET",
     dataType: "json",
@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   $(document).ready(function () {
     $.ajax({
-      url: "https://3c80-190-96-112-182.ngrok-free.app/api/DiamondOfert",
+      url: "https://f017-190-96-112-182.ngrok-free.app/api/DiamondOfert",
       method: "GET",
       dataType: "json",
       headers: {
@@ -82,7 +82,7 @@ $(document).ready(function () {
     });
   });
   $.ajax({
-    url: "https://3c80-190-96-112-182.ngrok-free.app/api/Game/config",
+    url: "https://f017-190-96-112-182.ngrok-free.app/api/Game/config",
     type: "GET",
     headers: {
       Authorization: "Bearer " + cookieUser.token,
@@ -133,7 +133,7 @@ $(document).ready(function () {
 
   $("#rechargeLives").click(function () {
     $.ajax({
-      url: "https://3c80-190-96-112-182.ngrok-free.app/api/lives/recharge",
+      url: "https://f017-190-96-112-182.ngrok-free.app/api/lives/recharge",
       method: "POST",
       dataType: "json",
       contentType: "application/json",
@@ -161,7 +161,7 @@ $(document).ready(function () {
   //Cargar cartas en venta
 
   $.ajax({
-    url: "https://3c80-190-96-112-182.ngrok-free.app/api/cardoferts", // URL del endpoint
+    url: "https://f017-190-96-112-182.ngrok-free.app/api/cardoferts", // URL del endpoint
     type: "GET", // Método HTTP
     data: { userId: cookieUser.id }, // Parámetros de consulta
     headers: {
@@ -246,7 +246,7 @@ $(document).ready(function () {
     };
 
     $.ajax({
-      url: "https://3c80-190-96-112-182.ngrok-free.app/api/cardoferts/UnlockCharacter", // Endpoint en tu backend
+      url: "https://f017-190-96-112-182.ngrok-free.app/api/cardoferts/UnlockCharacter", // Endpoint en tu backend
       type: "POST", // Método HTTP
       contentType: "application/json", // Tipo de contenido JSON
       data: JSON.stringify(requestData), // Convertimos el objeto a JSON
@@ -292,7 +292,7 @@ function crearPreferencia(id) {
   ofert = diamodOfertList.find((ofert) => ofert.id === id);
   $.ajax({
     url:
-      "https://3c80-190-96-112-182.ngrok-free.app/api/MercadoPago/crear-preferencia/" +
+      "https://f017-190-96-112-182.ngrok-free.app/api/MercadoPago/crear-preferencia/" +
       ofert.id, // Endpoint en tu backend
     type: "POST", // Método HTTP
     contentType: "application/json", // Tipo de contenido JSON
@@ -345,7 +345,7 @@ function cancelInvoice(id) {
   };
   $.ajax({
     url:
-      "https://3c80-190-96-112-182.ngrok-free.app/api/MercadoPago/cancelInvoice/" +
+      "https://f017-190-96-112-182.ngrok-free.app/api/MercadoPago/cancelInvoice/" +
       id,
     type: "POST",
     contentType: "application/json",
