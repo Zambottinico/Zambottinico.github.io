@@ -16,7 +16,7 @@ if (!cookieUser) {
 
 $(document).ready(function () {
   $.ajax({
-    url: "https://localhost:7116/api/DiamondOfert",
+    url: "https://3c80-190-96-112-182.ngrok-free.app/api/DiamondOfert",
     method: "GET",
     dataType: "json",
     headers: {
@@ -91,7 +91,7 @@ function eliminarOferta(id) {
   var clave = cookieUser.clave;
 
   $.ajax({
-    url: `https://localhost:7116/api/DiamondOfert/${id}`,
+    url: `https://3c80-190-96-112-182.ngrok-free.app/api/DiamondOfert/${id}`,
     type: "DELETE",
     contentType: "application/json",
     data: JSON.stringify({
@@ -149,7 +149,7 @@ document.getElementById("create").addEventListener("click", function () {
 
 // Función para realizar el POST
 function postOffer(offerData) {
-  fetch("https://localhost:7116/api/DiamondOfert", {
+  fetch("https://3c80-190-96-112-182.ngrok-free.app/api/DiamondOfert", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -171,7 +171,7 @@ function postOffer(offerData) {
 
 // Función para realizar el PUT
 function updateOffer(offerData, id) {
-  fetch(`https://localhost:7116/api/DiamondOfert/` + id, {
+  fetch(`https://3c80-190-96-112-182.ngrok-free.app/api/DiamondOfert/` + id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
