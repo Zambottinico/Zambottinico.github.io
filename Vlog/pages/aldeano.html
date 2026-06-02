@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MhhScript — Compilador Aldeano</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+  :root {
+    --bg:       #1a1a2e;
+    --panel:    #16213e;
+    --card:     #0f3460;
+    --accent:   #e94560;
+    --green:    #57c84d;
+    --yellow:   #f5c518;
+    --brown:    #8B5E3C;
+    --tan:      #c9956c;
+    --text:     #e0e0e0;
+    --muted:    #7f8c8d;
+    --pixel:    2px;
+    --dirt:     #6b4c2a;
+    --grass:    #5d8a3c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'VT323', monospace;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Pixel grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+    background-size: 16px 16px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Floating particles */
+  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .particle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--green);
+    image-rendering: pixelated;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+  @keyframes float {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: .6; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Header */
+  header {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    border-bottom: 4px solid var(--brown);
+    background: linear-gradient(180deg, #0a0a1a 0%, var(--panel) 100%);
+  }
+
+  .villager-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: .5rem;
+    filter: drop-shadow(0 0 16px var(--green));
+    animation: blink 3s step-end infinite;
+  }
+  @keyframes blink { 50% { filter: drop-shadow(0 0 24px var(--yellow)); } }
+
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(.9rem, 2.5vw, 1.4rem);
+    color: var(--yellow);
+    text-shadow: 3px 3px 0 #5a3a00, -1px -1px 0 #000;
+    letter-spacing: 2px;
+    line-height: 1.6;
+  }
+  .subtitle {
+    font-size: 1.4rem;
+    color: var(--tan);
+    margin-top: .4rem;
+    letter-spacing: 3px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    background: var(--grass);
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .55rem;
+    padding: 4px 8px;
+    margin-top: .6rem;
+    border: 2px solid #3d6b28;
+    box-shadow: 2px 2px 0 #000;
+    letter-spacing: 1px;
+  }
+
+  /* Main layout */
+  main {
+    position: relative; z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 720px) { main { grid-template-columns: 1fr; } }
+
+  /* Panels */
+  .pane {
+    background: var(--panel);
+    border: 4px solid var(--brown);
+    box-shadow: 4px 4px 0 #000, inset 0 0 0 2px rgba(255,255,255,.04);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pane-header {
+    background: var(--dirt);
+    padding: .5rem .8rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border-bottom: 3px solid #3d2a15;
+  }
+  .pane-header .dot {
+    width: 10px; height: 10px;
+    border: 2px solid #000;
+    image-rendering: pixelated;
+  }
+  .dot-r { background: var(--accent); }
+  .dot-y { background: var(--yellow); }
+  .dot-g { background: var(--green); }
+
+  .pane-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: .6rem;
+    color: var(--tan);
+    letter-spacing: 1px;
+    flex: 1;
+  }
+
+  textarea {
+    flex: 1;
+    background: #0a0a12;
+    color: var(--green);
+    font-family: 'VT323', monospace;
+    font-size: 1.6rem;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    resize: none;
+    line-height: 1.7;
+    letter-spacing: 2px;
+    caret-color: var(--yellow);
+    min-height: 220px;
+  }
+  textarea::placeholder { color: #2a4a2a; }
+  textarea:focus { background: #080810; }
+
+  /* Output */
+  .output-box {
+    background: #0a0a12;
+    color: var(--text);
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    padding: 1rem;
+    min-height: 220px;
+    flex: 1;
+    line-height: 1.8;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  .output-box .ok    { color: var(--green); }
+  .output-box .err   { color: var(--accent); }
+  .output-box .warn  { color: var(--yellow); }
+  .output-box .num   { color: #7ec8e3; }
+  .output-box .str   { color: #f4a261; }
+  .output-box .kw    { color: #c77dff; }
+  .output-box .prompt{ color: var(--muted); }
+
+  /* Buttons */
+  .btn-row {
+    padding: .6rem;
+    display: flex;
+    gap: .5rem;
+    background: var(--panel);
+    border-top: 2px solid var(--brown);
+  }
+
+  button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: .6rem;
+    padding: 8px 14px;
+    border: 3px solid;
+    cursor: pointer;
+    image-rendering: pixelated;
+    transition: transform .07s, box-shadow .07s;
+    letter-spacing: .5px;
+  }
+  button:active { transform: translate(2px,2px); box-shadow: none !important; }
+
+  .btn-run {
+    background: var(--green);
+    color: #000;
+    border-color: #2d6b28;
+    box-shadow: 3px 3px 0 #1a3d18;
+    flex: 1;
+  }
+  .btn-run:hover { background: #6edd62; }
+
+  .btn-clear {
+    background: var(--accent);
+    color: #fff;
+    border-color: #8c2033;
+    box-shadow: 3px 3px 0 #5a1522;
+  }
+  .btn-clear:hover { background: #ff6b7a; }
+
+  .btn-example {
+    background: var(--yellow);
+    color: #000;
+    border-color: #9a7800;
+    box-shadow: 3px 3px 0 #5a4500;
+  }
+  .btn-example:hover { background: #ffd740; }
+
+  /* Docs section */
+  .docs {
+    grid-column: 1 / -1;
+    background: var(--panel);
+    border: 4px solid var(--brown);
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .docs-body {
+    padding: 1rem 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: .8rem;
+  }
+
+  .token-card {
+    background: #0a0a1e;
+    border: 2px solid #1e3a5f;
+    padding: .6rem .8rem;
+  }
+  .token-code {
+    font-size: 1.4rem;
+    color: var(--green);
+    letter-spacing: 2px;
+    display: block;
+  }
+  .token-meaning {
+    font-size: 1.1rem;
+    color: var(--muted);
+    display: block;
+    margin-top: .2rem;
+  }
+  .token-type {
+    font-family: 'Press Start 2P', monospace;
+    font-size: .45rem;
+    color: var(--yellow);
+    opacity: .7;
+  }
+
+  /* Status bar */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 10;
+    background: var(--grass);
+    border-top: 4px solid #3d6b28;
+    padding: 4px 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .5rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+  }
+  .status-bar span { opacity: .8; }
+  #status-msg { color: var(--yellow); opacity: 1 !important; }
+
+  /* Line counter */
+  #line-count { color: #c8f7b0; }
+
+  /* Typing cursor blink */
+  @keyframes cursor-blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #000; }
+  ::-webkit-scrollbar-thumb { background: var(--brown); }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<header>
+  <span class="villager-icon"><img src="aldeano.png" alt="" width="50" height="100%"></span>
+  <h1>MhhScript</h1>
+  <div class="subtitle">COMPILADOR DE LENGUAJE ALDEANO v1.0</div>
+  <div class="badge">✦ TURING COMPLETO (probablemente) ✦</div>
+</header>
+
+<main>
+  <!-- Editor -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span class="pane-title">EDITOR.mhh</span>
+      <span id="line-count" style="font-size:.5rem;font-family:'Press Start 2P',monospace">0 líneas</span>
+    </div>
+    <textarea id="code" placeholder="mhh mhh? mHH...&#10;&#10;Escribe tu código aldeano aquí.&#10;Solo se permiten variaciones de mhh." spellcheck="false"></textarea>
+    <div class="btn-row">
+      <button class="btn-run" onclick="compilar()">▶ COMPILAR</button>
+      <button class="btn-example" onclick="cargarEjemplo()">DEMO</button>
+      <button class="btn-clear" onclick="limpiar()">✕</button>
+    </div>
+  </div>
+
+  <!-- Output -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="dot dot-g"></div>
+      <div class="dot dot-g"></div>
+      <div class="dot dot-r"></div>
+      <span class="pane-title">CONSOLA</span>
+    </div>
+    <div class="output-box" id="output"><span class="prompt">// Listo para compilar código aldeano...</span></div>
+    <div class="btn-row">
+      <button class="btn-clear" style="flex:1" onclick="clearOutput()">LIMPIAR CONSOLA</button>
+    </div>
+  </div>
+
+  <!-- Docs -->
+  <div class="pane docs">
+    <div class="pane-header">
+      <div class="dot dot-y"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-y"></div>
+      <span class="pane-title">📖 REFERENCIA DEL IDIOMA ALDEANO</span>
+    </div>
+    <div class="docs-body" id="docs"></div>
+  </div>
+</main>
+
+<div class="status-bar">
+  <span>🟩 MhhScrip IDE</span>
+  <span id="status-msg">Esperando código...</span>
+  <span style="margin-left:auto">Minecraft Villager™ Compatible</span>
+</div>
+
+<script>
+/* =========================================================
+   MhhScript — Especificación del lenguaje
+   Cada "token" es una variación de "mhh":
+   =========================================================
+
+   TOKENS:
+   mhh          → PUSH 1 (número)
+   mHh          → PUSH 0
+   MHH          → PRINT (saca de pila, imprime)
+   mhH          → ADD (suma top 2)
+   MhH          → SUB (resta)
+   mHH          → MUL (multiplica)
+   Mhh          → DIV (divide)
+   MhH          → SUB
+   MHh          → DUP (duplica top)
+   mmh          → POP (descarta top)
+   mhm          → SWAP (intercambia top 2)
+   Mmh          → PRINT_CHAR (imprime como carácter ASCII)
+   MmH          → INPUT (push input del usuario — simulado)
+   mMH          → LOOP_START (si top==0 salta a LOOP_END)
+   Mmm          → LOOP_END
+   mMm          → NOP / comentario
+   mhh!         → PUSH número (!! = 2, !!! = 3, etc)
+   mhh?         → DEBUG (muestra pila)
+   MHH!         → PRINT_STR (imprime top como número, siempre)
+   mHh!         → PUSH -1
+
+   Números enteros: repetir "mhh" N veces = push N
+   e.g. mhh mhh mhh = push 3
+
+   Separadores: espacios, saltos de línea, comas
+   Comentarios: líneas que empiezan con ;; o //
+========================================================= */
+
+const TOKENS = {
+  'mhh':  { op: 'PUSH_1',      desc: 'Poner 1 en la pila',         tipo: 'LITERAL' },
+  'mHh':  { op: 'PUSH_0',      desc: 'Poner 0 en la pila',         tipo: 'LITERAL' },
+  'MHH':  { op: 'PRINT',       desc: 'Imprimir número (pop)',       tipo: 'I/O' },
+  'Mmh':  { op: 'PRINT_CHAR',  desc: 'Imprimir carácter ASCII',     tipo: 'I/O' },
+  'mhH':  { op: 'ADD',         desc: 'Sumar top 2',                tipo: 'ARITH' },
+  'MhH':  { op: 'SUB',         desc: 'Restar (a - b)',             tipo: 'ARITH' },
+  'mHH':  { op: 'MUL',         desc: 'Multiplicar top 2',          tipo: 'ARITH' },
+  'Mhh':  { op: 'DIV',         desc: 'Dividir (a / b)',            tipo: 'ARITH' },
+  'MHh':  { op: 'DUP',         desc: 'Duplicar top de pila',       tipo: 'PILA' },
+  'mmh':  { op: 'POP',         desc: 'Descartar top de pila',      tipo: 'PILA' },
+  'mhm':  { op: 'SWAP',        desc: 'Intercambiar top 2',         tipo: 'PILA' },
+  'mMH':  { op: 'LOOP_START',  desc: 'Inicio bucle (si top==0 salta)', tipo: 'FLUJO' },
+  'Mmm':  { op: 'LOOP_END',    desc: 'Fin de bucle',               tipo: 'FLUJO' },
+  'mMm':  { op: 'NOP',         desc: 'No operación / comentario',  tipo: 'MISC' },
+  'mhh?': { op: 'DEBUG',       desc: 'Mostrar estado de la pila',  tipo: 'MISC' },
+  'mHh!': { op: 'PUSH_NEG1',   desc: 'Poner -1 en la pila',        tipo: 'LITERAL' },
+  'MmH':  { op: 'PUSH_INPUT',  desc: 'Leer número de entrada',     tipo: 'I/O' },
+};
+
+// Renderizar docs
+(function renderDocs() {
+  const container = document.getElementById('docs');
+  for (const [tok, info] of Object.entries(TOKENS)) {
+    const div = document.createElement('div');
+    div.className = 'token-card';
+    div.innerHTML = `
+      <span class="token-type">${info.tipo}</span>
+      <code class="token-code">${tok}</code>
+      <span class="token-meaning">${info.desc}</span>
+    `;
+    container.appendChild(div);
+  }
+  // extra note
+  const extra = document.createElement('div');
+  extra.className = 'token-card';
+  extra.innerHTML = `
+    <span class="token-type">LITERAL</span>
+    <code class="token-code">mhh × N</code>
+    <span class="token-meaning">Push N (repetir mhh N veces seguidas)</span>
+  `;
+  container.appendChild(extra);
+})();
+
+// Partículas
+(function spawnParticles() {
+  const c = document.getElementById('particles');
+  const colors = ['#57c84d','#f5c518','#8B5E3C','#c9956c','#e94560'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 18) + 's';
+    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.width = p.style.height = (4 + Math.floor(Math.random() * 3) * 4) + 'px';
+    c.appendChild(p);
+  }
+})();
+
+// Contador de líneas
+document.getElementById('code').addEventListener('input', function() {
+  const lines = this.value.split('\n').length;
+  document.getElementById('line-count').textContent = lines + ' líneas';
+});
+
+function setStatus(msg) {
+  document.getElementById('status-msg').textContent = msg;
+}
+
+function clearOutput() {
+  document.getElementById('output').innerHTML = '<span class="prompt">// Consola limpiada. mhh!</span>';
+}
+
+function limpiar() {
+  document.getElementById('code').value = '';
+  document.getElementById('line-count').textContent = '0 líneas';
+  setStatus('Editor limpiado');
+}
+
+function appendOutput(html) {
+  const box = document.getElementById('output');
+  box.innerHTML += html + '\n';
+  box.scrollTop = box.scrollHeight;
+}
+
+function cargarEjemplo() {
+  // Ejemplo: imprime "Hola" (H=72 o=111 l=108 a=97) + suma
+  const ejemplos = [
+`;; Ejemplo 1: Imprimir números
+;; Push 5, push 3, sumar, imprimir
+mhh mhh mhh mhh mhh
+mhh mhh mhh
+mhH
+MHH
+
+;; Multiplicar 4 × 3
+mhh mhh mhh mhh
+mhh mhh mhh
+mHH
+MHH`,
+
+
+`;; Ejemplo 3: Cuadrado de 7 (7x7=49)
+;; Push 7 dos veces, multiplicar, imprimir
+mhh mhh mhh mhh mhh mhh mhh
+MHh
+mHH
+MHH
+
+;; Debug — ver pila
+mhh mhh mhh
+mhh?`,
+
+`;; Ejemplo 4: Countdown 5..1
+;; Push 5, duplicar, imprimir, restar 1, loop
+mhh mhh mhh mhh mhh
+mMH
+MHh
+MHH
+mhh
+MhH
+MHh
+Mmm`
+  ];
+  const idx = Math.floor(Math.random() * ejemplos.length);
+  document.getElementById('code').value = ejemplos[idx];
+  const lines = ejemplos[idx].split('\n').length;
+  document.getElementById('line-count').textContent = lines + ' líneas';
+  setStatus('Ejemplo cargado — ¡a compilar!');
+}
+
+function repeat(s, n) {
+  return Array(n).fill(s).join(' ');
+}
+
+// ==================== COMPILADOR ====================
+
+function tokenize(src) {
+  const tokens = [];
+  // línea por línea
+  for (const line of src.split('\n')) {
+    const trimmed = line.trim();
+    // comentarios
+    if (trimmed.startsWith(';;') || trimmed.startsWith('//')) continue;
+    // dividir por espacios/comas
+    const parts = trimmed.split(/[\s,]+/).filter(Boolean);
+    for (const p of parts) {
+      // verificar que sea solo variación de mhh (letras m, h, M, H más ! o ?)
+      if (!/^[mMhH!?]+$/.test(p)) {
+        return { error: `Token inválido: "${p}". ¡El aldeano solo habla en mhh!` };
+      }
+      tokens.push(p);
+    }
+  }
+  return { tokens };
+}
+
+function compilar() {
+  const src = document.getElementById('code').value.trim();
+  const box = document.getElementById('output');
+  box.innerHTML = '';
+
+  if (!src) {
+    box.innerHTML = '<span class="warn">⚠ No hay código que compilar. ¡Escribe algo, aldeano!</span>';
+    setStatus('Sin código');
+    return;
+  }
+
+  const result = tokenize(src);
+  if (result.error) {
+    box.innerHTML = `<span class="err">❌ ERROR LÉXICO: ${result.error}</span>`;
+    setStatus('Error léxico');
+    return;
+  }
+
+  const tokens = result.tokens;
+  box.innerHTML = `<span class="prompt">── Compilando ${tokens.length} tokens... ──</span>\n`;
+
+  // Ejecutar
+  try {
+    const output = ejecutar(tokens);
+    for (const line of output) {
+      box.innerHTML += line + '\n';
+    }
+    box.innerHTML += `\n<span class="ok">── ✓ Ejecución completada ──</span>`;
+    setStatus(`OK — ${tokens.length} tokens ejecutados`);
+  } catch(e) {
+    box.innerHTML += `\n<span class="err">❌ ERROR EN TIEMPO DE EJECUCIÓN: ${e.message}</span>`;
+    setStatus('Error de ejecución');
+  }
+
+  box.scrollTop = box.scrollHeight;
+}
+
+function ejecutar(tokens) {
+  const output = [];
+  const stack = [];
+  const MAX_OPS = 50000;
+  let ops = 0;
+
+  // Pre-procesar: contar mhh consecutivos para push N
+  // Si hay N tokens "mhh" seguidos sin ser precedidos/seguidos de otra instrucción,
+  // se fusionan en PUSH N
+  const program = [];
+  let i = 0;
+  while (i < tokens.length) {
+    const t = tokens[i];
+    if (t === 'mhh') {
+      // contar cuántos mhh consecutivos
+      let count = 0;
+      while (i < tokens.length && tokens[i] === 'mhh') { count++; i++; }
+      program.push({ op: 'PUSH', val: count });
+    } else if (t === 'mHh') {
+      program.push({ op: 'PUSH', val: 0 }); i++;
+    } else if (t === 'mHh!') {
+      program.push({ op: 'PUSH', val: -1 }); i++;
+    } else if (TOKENS[t]) {
+      program.push({ op: TOKENS[t].op }); i++;
+    } else {
+      // token desconocido — ignorar con advertencia
+      output.push(`<span class="warn">⚠ Token desconocido ignorado: ${t}</span>`);
+      i++;
+    }
+  }
+
+  // Resolver loops
+  const loopStack = [];
+  const loopMap = {}; // start_idx -> end_idx, end_idx -> start_idx
+
+  for (let j = 0; j < program.length; j++) {
+    if (program[j].op === 'LOOP_START') {
+      loopStack.push(j);
+    } else if (program[j].op === 'LOOP_END') {
+      if (loopStack.length === 0) throw new Error('LOOP_END sin LOOP_START (mMH faltante)');
+      const start = loopStack.pop();
+      loopMap[start] = j;
+      loopMap[j] = start;
+    }
+  }
+  if (loopStack.length > 0) throw new Error('LOOP_START sin LOOP_END (Mmm faltante)');
+
+  function pop() {
+    if (stack.length === 0) throw new Error('Pila vacía — ¡no hay nada que sacar! mhh...');
+    return stack.pop();
+  }
+  function peek() {
+    if (stack.length === 0) throw new Error('Pila vacía (peek)');
+    return stack[stack.length - 1];
+  }
+
+  let pc = 0;
+  while (pc < program.length) {
+    if (++ops > MAX_OPS) throw new Error('Límite de operaciones alcanzado (loop infinito?)');
+
+    const instr = program[pc];
+
+    switch (instr.op) {
+      case 'PUSH':
+        stack.push(instr.val);
+        break;
+      case 'PUSH_1':
+        stack.push(1);
+        break;
+      case 'PUSH_0':
+        stack.push(0);
+        break;
+      case 'PUSH_NEG1':
+        stack.push(-1);
+        break;
+      case 'PRINT': {
+        const v = pop();
+        output.push(`<span class="num">${v}</span>`);
+        break;
+      }
+      case 'PRINT_CHAR': {
+        const v = pop();
+        const ch = String.fromCharCode(v);
+        output.push(`<span class="str">${ch}</span>`);
+        break;
+      }
+      case 'ADD': {
+        const b = pop(), a = pop();
+        stack.push(a + b);
+        break;
+      }
+      case 'SUB': {
+        const b = pop(), a = pop();
+        stack.push(a - b);
+        break;
+      }
+      case 'MUL': {
+        const b = pop(), a = pop();
+        stack.push(a * b);
+        break;
+      }
+      case 'DIV': {
+        const b = pop(), a = pop();
+        if (b === 0) throw new Error('División por cero — ¡ni el aldeano lo hace!');
+        stack.push(Math.floor(a / b));
+        break;
+      }
+      case 'DUP':
+        stack.push(peek());
+        break;
+      case 'POP':
+        pop();
+        break;
+      case 'SWAP': {
+        const b = pop(), a = pop();
+        stack.push(b); stack.push(a);
+        break;
+      }
+      case 'LOOP_START': {
+        const top = peek();
+        if (top === 0) {
+          pc = loopMap[pc]; // saltar al LOOP_END
+        }
+        break;
+      }
+      case 'LOOP_END': {
+        const top = peek();
+        if (top !== 0) {
+          pc = loopMap[pc]; // volver al LOOP_START
+        }
+        break;
+      }
+      case 'NOP':
+        break;
+      case 'DEBUG':
+        output.push(`<span class="kw">🔍 PILA: [${stack.join(', ')}] (top→)</span>`);
+        break;
+      case 'PUSH_INPUT':
+        // Simular entrada con valor aleatorio 1-10
+        const val = Math.floor(Math.random() * 10) + 1;
+        stack.push(val);
+        output.push(`<span class="warn">📥 INPUT simulado: ${val}</span>`);
+        break;
+    }
+
+    pc++;
+  }
+
+  if (stack.length > 0) {
+    output.push(`<span class="prompt">── Pila final: [${stack.join(', ')}] ──</span>`);
+  }
+
+  return output;
+}
+
+
+</script>
+</body>
+</html>
