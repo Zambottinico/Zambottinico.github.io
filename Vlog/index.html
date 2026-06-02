@@ -1,0 +1,917 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Tahoma&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #c8c8c8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M10 2 L10 18 M2 10 L18 10 M7 5 L13 5 M7 15 L13 15 M5 7 L5 13 M15 7 L15 13' stroke='%23a0a0a8' stroke-width='0.6' opacity='0.5'/%3E%3C/svg%3E");
+  font-family: 'Tahoma', 'Verdana', sans-serif;
+  font-size: 11px;
+  color: #222;
+}
+
+.page-wrap {
+  width: 780px;
+  margin: 0 auto;
+  padding: 8px 0 20px;
+}
+
+/* BANNER */
+.banner {
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  border: 2px outset #d0d0d0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.banner-grass {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 28px;
+  background: linear-gradient(180deg, #3a7d44 0%, #2d6a3f 100%);
+}
+.banner-grass::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: 0; right: 0; height: 12px;
+  background: repeating-linear-gradient(90deg, #3a7d44 0px, #3a7d44 8px, #4a9a55 8px, #4a9a55 14px, #3a7d44 14px);
+  clip-path: polygon(0 100%, 3% 0, 6% 100%, 9% 0, 12% 100%, 15% 0, 18% 100%, 21% 0, 24% 100%, 27% 0, 30% 100%, 33% 0, 36% 100%, 39% 0, 42% 100%, 45% 0, 48% 100%, 51% 0, 54% 100%, 57% 0, 60% 100%, 63% 0, 66% 100%, 69% 0, 72% 100%, 75% 0, 78% 100%, 81% 0, 84% 100%, 87% 0, 90% 100%, 93% 0, 96% 100%, 99% 0, 100% 100%);
+}
+
+/* CRT Monitor SVG elements */
+.crt-monitor {
+  position: absolute;
+  bottom: 14px;
+}
+.crt-left { left: 18px; }
+.crt-right { right: 18px; }
+.crt-mid { left: 50%; transform: translateX(-50%) scale(0.85); bottom: 14px; }
+
+.banner-title {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 38px;
+  text-align: center;
+  line-height: 1;
+  background: linear-gradient(180deg, #fff 0%, #e8e8e8 30%, #aaa 50%, #e8e8e8 70%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 6px rgba(200,200,255,0.7)) drop-shadow(0 2px 1px rgba(0,0,0,0.8));
+  z-index: 10;
+  position: relative;
+}
+.banner-sub {
+  font-size: 10px;
+  color: #99aacc;
+  text-align: center;
+  letter-spacing: 3px;
+  z-index: 10;
+  position: relative;
+  margin-top: 4px;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* MAIN LAYOUT */
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.main-table td { vertical-align: top; }
+
+/* BEVEL BOXES */
+.box {
+  background: #d4d0c8;
+  border: 2px outset #ffffff;
+  margin-bottom: 4px;
+  padding: 0;
+}
+.box-title {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  font-family: 'Tahoma', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.box-title.gothic {
+  background: linear-gradient(90deg, #2a0a2a 0%, #5a1a5a 100%);
+}
+.box-title.dark {
+  background: linear-gradient(90deg, #1a1a1a 0%, #3a3a3a 100%);
+}
+.box-inner {
+  padding: 5px;
+}
+
+/* LEFT NAV */
+.left-col { width: 148px; padding-right: 3px; }
+.nav-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, #e8e4dc 0%, #c8c4bc 100%);
+  border: 2px outset #fff;
+  color: #222;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  padding: 3px 6px;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 2px;
+  text-decoration: none;
+}
+.nav-btn:hover {
+  background: linear-gradient(180deg, #d0ccc4 0%, #b0acA4 100%);
+  border: 2px inset #aaa;
+}
+.nav-btn::before { content: '► '; font-size: 9px; color: #666; }
+
+.gothic-ornament {
+  text-align: center;
+  font-size: 14px;
+  color: #4a0a4a;
+  padding: 3px;
+  font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.visit-counter {
+  background: #000;
+  border: 2px inset #555;
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  text-align: center;
+  padding: 4px;
+  letter-spacing: 4px;
+}
+.visit-label { font-size: 9px; color: #666; text-align: center; margin-top: 2px; }
+
+/* CENTER COL */
+.center-col { width: 450px; padding: 0 3px; }
+
+.welcome-text { font-size: 11px; line-height: 1.5; padding: 4px; color: #111; }
+.welcome-text b { color: #000080; }
+
+/* PIXEL DECORATIONS */
+.pixel-heart { display: inline-block; width: 8px; height: 8px; background: #cc0055; clip-path: polygon(50% 90%, 10% 40%, 0% 25%, 10% 10%, 30% 10%, 50% 30%, 70% 10%, 90% 10%, 100% 25%, 90% 40%); }
+.pixel-star { color: #ffcc00; font-size: 10px; }
+
+/* ANIME IMAGES GRID */
+.anime-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; padding: 4px; }
+.anime-img {
+  height: 72px;
+  border: 2px inset #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: #555;
+  overflow: hidden;
+  position: relative;
+}
+
+/* BADGES */
+.badges { display: flex; flex-wrap: wrap; gap: 3px; padding: 5px; }
+.badge {
+  border: 1px solid #888;
+  font-size: 8px;
+  font-family: 'Tahoma', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 19px;
+  padding: 0 4px;
+  white-space: nowrap;
+  cursor: default;
+}
+.badge-wb { background: linear-gradient(90deg, #003399 40%, #fff 40%); color: #fff; border-color: #001166; }
+.badge-wb span { color: #003399; margin-left: 4px; font-weight: bold; }
+.badge-nu { background: #000; color: #00ff00; border-color: #00ff00; font-family: 'Courier New'; }
+.badge-pink { background: linear-gradient(180deg, #ffaacc 0%, #ff66aa 100%); color: #fff; border-color: #cc3377; font-weight: bold; }
+.badge-xp { background: linear-gradient(180deg, #4a9a4a 0%, #2a7a2a 100%); color: #fff; border-color: #1a5a1a; }
+.badge-gray { background: linear-gradient(180deg, #e0e0e0 0%, #aaaaaa 100%); color: #222; border-color: #888; }
+.badge-red { background: linear-gradient(180deg, #cc0000 0%, #880000 100%); color: #fff; border-color: #550000; }
+.badge-gold { background: linear-gradient(90deg, #8B6914 0%, #FFD700 50%, #8B6914 100%); color: #fff; border-color: #8B6914; font-weight: bold; font-size: 8px; }
+
+/* MUSIC PLAYER */
+.music-player {
+  background: #1a1a1a;
+  border: 2px inset #555;
+  padding: 6px;
+  margin: 4px;
+}
+.music-title { color: #00ccff; font-family: 'Courier New'; font-size: 10px; margin-bottom: 4px; overflow: hidden; }
+.music-scroll { display: inline-block; white-space: nowrap; animation: scroll-text 8s linear infinite; }
+@keyframes scroll-text { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.music-controls { display: flex; gap: 3px; margin-top: 4px; }
+.music-btn {
+  background: linear-gradient(180deg, #555 0%, #333 100%);
+  border: 1px outset #777;
+  color: #ccc;
+  font-size: 9px;
+  padding: 2px 5px;
+  cursor: pointer;
+  font-family: 'Tahoma';
+}
+.music-btn:hover,
+.music-btn.is-active { background: linear-gradient(180deg, #666 0%, #444 100%); color: #00ccff; }
+.music-progress { height: 6px; background: #333; border: 1px inset #555; margin-top: 4px; position: relative; cursor: pointer; }
+.music-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #0088cc, #00ccff); }
+.music-time { color: #666; font-size: 9px; font-family: 'Courier New'; margin-top: 2px; }
+
+/* RIGHT COL */
+.right-col { width: 178px; padding-left: 3px; }
+
+/* CHATBOX */
+.chatbox-msgs {
+  background: #fff;
+  border: 2px inset #999;
+  height: 90px;
+  overflow-y: auto;
+  padding: 3px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.chat-msg { margin-bottom: 3px; }
+.chat-name { color: #000080; font-weight: bold; }
+.chat-name.pink { color: #cc0066; }
+.chat-name.purple { color: #660099; }
+.chatbox-input { display: flex; gap: 2px; margin-top: 3px; }
+.chatbox-input input {
+  flex: 1;
+  border: 2px inset #999;
+  background: #fff;
+  font-size: 10px;
+  font-family: 'Tahoma';
+  padding: 1px 3px;
+}
+.chatbox-input button {
+  background: linear-gradient(180deg, #e8e4dc 0%, #c0bbb3 100%);
+  border: 2px outset #fff;
+  font-size: 10px;
+  font-family: 'Tahoma';
+  padding: 1px 5px;
+  cursor: pointer;
+}
+
+/* UPDATES */
+.update-item { padding: 3px 4px; border-bottom: 1px dotted #aaa; font-size: 10px; line-height: 1.3; }
+.update-date { color: #000080; font-weight: bold; font-size: 9px; }
+
+/* GOTHIC ICONS */
+.gothic-icons { display: flex; justify-content: center; gap: 8px; padding: 5px; flex-wrap: wrap; }
+.goth-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 16px; filter: drop-shadow(0 0 3px rgba(150,0,150,0.6)); }
+
+/* NOW PLAYING */
+.now-playing { padding: 4px; }
+.np-track { font-size: 10px; color: #333; margin: 2px 0; }
+.np-track b { color: #000080; }
+.np-bar { height: 4px; background: #ddd; border: 1px inset #aaa; margin: 3px 0; }
+.np-fill { height: 100%; }
+
+/* SEPARATOR */
+.section-sep {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  padding: 3px;
+  letter-spacing: 2px;
+}
+
+/* DIVIDER LINE */
+.divider { height: 1px; background: linear-gradient(90deg, transparent, #999, #fff, #999, transparent); margin: 3px 0; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #c8c4bc; border: 1px inset #aaa; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #e0dcd4 0%, #a8a4a0 100%); border: 1px outset #ddd; }
+
+/* STATUS BAR */
+.status-bar {
+  background: linear-gradient(180deg, #d4d0c8 0%, #c0bbb3 100%);
+  border: 1px inset #aaa;
+  font-size: 10px;
+  padding: 2px 6px;
+  display: flex;
+  gap: 12px;
+  margin-top: 3px;
+}
+.status-panel { border: 1px inset #aaa; padding: 1px 8px; background: #d0ccc4; }
+
+.blinking { animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+.marquee-wrap { overflow: hidden; background: #000; border: 1px inset #555; padding: 2px; }
+.marquee-text { color: #ffcc00; font-size: 9px; font-family: 'Courier New'; display: inline-block; animation: scroll-text 12s linear infinite; }
+
+/* CRT SVG */
+.crt-svg { display: block; }
+</style>
+
+<div class="page-wrap">
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="stars" id="stars"></div>
+
+  <!-- CRT Left -->
+  <svg class="crt-monitor crt-left" width="72" height="66" viewBox="0 0 72 66">
+    <rect x="2" y="2" width="54" height="42" rx="4" fill="#c8c0a8" stroke="#888" stroke-width="1.5"/>
+    <rect x="4" y="4" width="50" height="38" rx="3" fill="#1a1a1a"/>
+    <rect x="6" y="6" width="46" height="34" rx="2" fill="#0a0e18"/>
+    <!-- screen content -->
+    <rect x="8" y="8" width="42" height="4" fill="#003300" opacity="0.8"/>
+    <text x="29" y="13" fill="#00ff41" font-size="5" font-family="Courier New" text-anchor="middle">C:\WINNT&gt;_</text>
+    <rect x="8" y="14" width="30" height="2" fill="#003300" opacity="0.5"/>
+    <rect x="8" y="18" width="42" height="2" fill="#003300" opacity="0.3"/>
+    <rect x="8" y="22" width="25" height="2" fill="#003300" opacity="0.3"/>
+    <!-- screen glare -->
+    <ellipse cx="15" cy="10" rx="8" ry="4" fill="white" opacity="0.07"/>
+    <!-- base -->
+    <rect x="20" y="44" width="16" height="4" rx="1" fill="#b0a898" stroke="#888" stroke-width="1"/>
+    <rect x="14" y="48" width="28" height="4" rx="2" fill="#a09888" stroke="#888" stroke-width="1"/>
+    <!-- buttons -->
+    <circle cx="50" cy="22" r="2" fill="#2a2a2a" stroke="#555" stroke-width="0.5"/>
+    <rect x="48" y="28" width="6" height="2" rx="1" fill="#2a2a2a"/>
+  </svg>
+
+  <!-- CRT Right -->
+  <svg class="crt-monitor crt-right" width="72" height="66" viewBox="0 0 72 66">
+    <rect x="16" y="2" width="54" height="42" rx="4" fill="#c8c0a8" stroke="#888" stroke-width="1.5"/>
+    <rect x="18" y="4" width="50" height="38" rx="3" fill="#1a1a1a"/>
+    <rect x="20" y="6" width="46" height="34" rx="2" fill="#0a0818"/>
+    <!-- screen: anime scene suggestion -->
+    <rect x="20" y="6" width="46" height="34" fill="url(#grad1)" rx="2"/>
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a0a3a"/>
+        <stop offset="60%" stop-color="#2a1055"/>
+        <stop offset="100%" stop-color="#0a0510"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="43" cy="28" rx="20" ry="8" fill="#ff88cc" opacity="0.15"/>
+    <text x="43" y="22" fill="#ffaaee" font-size="14" text-anchor="middle" opacity="0.9">✦</text>
+    <text x="43" y="32" fill="#aaaaff" font-size="6" font-family="Courier New" text-anchor="middle">LOADING...</text>
+    <ellipse cx="30" cy="10" rx="6" ry="3" fill="white" opacity="0.06"/>
+    <!-- base -->
+    <rect x="34" y="44" width="16" height="4" rx="1" fill="#b0a898" stroke="#888" stroke-width="1"/>
+    <rect x="28" y="48" width="28" height="4" rx="2" fill="#a09888" stroke="#888" stroke-width="1"/>
+    <circle cx="62" cy="22" r="2" fill="#2a2a2a" stroke="#555" stroke-width="0.5"/>
+    <rect x="60" y="28" width="6" height="2" rx="1" fill="#2a2a2a"/>
+  </svg>
+
+  <div style="text-align:center; z-index:10; position:relative;">
+    <div class="banner-title">✦ Midnight Archive ✦</div>
+    <div class="banner-sub">personal webspace of Zambottinico</div>
+  </div>
+
+  <div class="banner-grass"></div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <span class="marquee-text">✦ WELCOME TO MY LITTLE CORNER OF THE NET ✦ · · · currently obsessed with: evangelion S2 · listening to: malice mizer · mood: ☽ melancholy ☾ · · · sign my guestbook!! · · · best viewed @ 1024x768 · · · ✦ no hotlinking ✦ · · ·</span>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <span class="status-panel">✦ Midnight Archive v4.0</span>
+  <span class="status-panel">HTML 4.01 Transitional</span>
+  <span class="status-panel" id="clock">loading...</span>
+  <span class="status-panel" style="margin-left:auto;">Best viewed 1024×768 · IE6 / Firefox</span>
+</div>
+
+</div>
+<!-- MAIN TABLE -->
+<div style="display: flex; justify-content: center; margin-top: 4px;">
+  <table class="main-table" style="width: 80%;">
+<tr>
+
+<!-- LEFT COLUMN -->
+<td class="left-col">
+
+  <div class="box">
+    <div class="box-title gothic">✝ Navigation ✝</div>
+    <div class="box-inner" style="padding:4px 3px;">
+      <div class="gothic-ornament">❦ ✦ ❦</div>
+      <a href="#" class="nav-btn">Home</a>
+<a href="#" class="nav-btn">About</a>
+<a href="#" class="nav-btn">Projects</a>
+<a href="#" class="nav-btn">Devlog</a>
+<a href="#" class="nav-btn">Godot</a>
+<a href="#" class="nav-btn">Tutorials</a>
+<a href="#" class="nav-btn">Portfolio</a>
+<a href="#" class="nav-btn">Notes</a>
+<a href="#" class="nav-btn">Contact</a>
+      <div class="gothic-ornament" style="margin-top:3px;">❦ ✦ ❦</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title dark">☆ Visitors</div>
+    <div class="box-inner">
+      <div class="visit-counter" id="counter">004721</div>
+      <div class="visit-label">visitors since 2003 ·•·</div>
+    </div>
+  </div>
+
+  <div class="box">
+  <div class="box-title gothic">✝ Status</div>
+  <div class="box-inner" style="font-size:10px; line-height:1.6; padding:4px;">
+    <div>💻 <b>Working on:</b> WhatsApp API Integration</div>
+    <div>🎮 <b>Developing:</b> Godot Projects</div>
+    <div>📚 <b>Learning:</b> Software Architecture</div>
+    <div>☕ <b>Fuel:</b> Coffee</div>
+    <div style="margin-top:4px; color:#008000;">
+      Last online:
+      <span class="blinking">NOW</span>
+    </div>
+  </div>
+</div>
+
+  <div class="box">
+    <div class="box-title dark">⚙ About Site</div>
+    <div class="box-inner" style="font-size:9px; line-height:1.5; padding:4px; color:#333;">
+      <div>Made with ♥ + Notepad</div>
+      <div>No tables were harmed</div>
+      <div style="margin-top:3px; color:#666;">HTML 4.01 · CSS2</div>
+      <div style="color:#000080; font-weight:bold;">Internet Explorer 6+</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title gothic">✝ Rings</div>
+    <div class="box-inner" style="font-size:9px; text-align:center; padding:4px; line-height:1.8;">
+      <div style="color:#660099;">◈ AnimeBlogRing ◈</div>
+      <div style="color:#000080;">◈ GothicWebRing ◈</div>
+      <div style="color:#cc0066;">◈ NeocitiesRing ◈</div>
+    </div>
+  </div>
+
+</td>
+
+<!-- CENTER COLUMN -->
+<td class="center-col">
+
+  <!-- WELCOME BOX -->
+  <div class="box">
+  <div class="box-title">
+    <span>✦</span> Welcome · Bienvenido
+  </div>
+  <div class="box-inner">
+    <div style="display:flex; gap:6px; align-items:flex-start;">
+
+      <img src="perfil.png" width="52" height="52"
+           style="border:2px inset #999;">
+
+      <div class="welcome-text">
+        <b>¡Hola!</b> Soy <b>Nicolás</b>, desarrollador Full Stack de Argentina.<br><br>
+
+        Actualmente trabajo con <b>.NET</b>, <b>Angular</b>,
+        <b>SQL Server</b> y <b>PostgreSQL</b>.
+        También desarrollo videojuegos con <b>Godot</b> y me gusta
+        experimentar con herramientas, tecnologías web y proyectos personales.<br><br>
+
+        Este sitio es mi rincón en internet donde comparto
+        proyectos, devlogs, tutoriales, notas técnicas y
+        cualquier cosa interesante que vaya aprendiendo.
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;">
+      <span style="font-size:10px; color:#666;">📍 Córdoba, Argentina</span> ·
+      <span style="font-size:10px; color:#666;">💻 .NET · Angular · Godot</span> ·
+      <span style="font-size:10px; color:#666;">🎮 Indie Game Dev</span>
+    </div>
+  </div>
+</div>
+
+  <!-- ART PREVIEW -->
+  <div class="box">
+    <div class="box-title gothic">✝ Art Gallery · recent uploads</div>
+    <div class="anime-grid">
+      <!-- Art card 1: anime girl -->
+      <div class="anime-img" style="background:linear-gradient(135deg,#1a0530 0%,#3a1060 50%,#1a0530 100%); border-color:#6a0a6a;">
+        <svg width="90" height="70" viewBox="0 0 90 70">
+          <!-- bg stars -->
+          <circle cx="15" cy="10" r="1" fill="#fff" opacity="0.5"/>
+          <circle cx="75" cy="20" r="0.8" fill="#fff" opacity="0.6"/>
+          <circle cx="60" cy="8" r="1.2" fill="#fff" opacity="0.4"/>
+          <!-- moon -->
+          <circle cx="72" cy="12" r="8" fill="#ffeeaa" opacity="0.7"/>
+          <circle cx="75" cy="10" r="7" fill="#3a1060" opacity="0.8"/>
+          <!-- figure -->
+          <ellipse cx="45" cy="28" rx="8" ry="9" fill="#f0c8a0"/>
+          <!-- hair -->
+          <ellipse cx="45" cy="22" rx="10" ry="8" fill="#1a0520"/>
+          <rect x="35" y="22" width="5" height="18" fill="#1a0520"/>
+          <rect x="50" y="22" width="5" height="18" fill="#1a0520"/>
+          <!-- eyes -->
+          <ellipse cx="41" cy="28" rx="3" ry="3.5" fill="#6600aa"/>
+          <ellipse cx="49" cy="28" rx="3" ry="3.5" fill="#6600aa"/>
+          <ellipse cx="41" cy="28" rx="2" ry="2.5" fill="#220033"/>
+          <ellipse cx="49" cy="28" rx="2" ry="2.5" fill="#220033"/>
+          <circle cx="40" cy="27" r="0.8" fill="#fff"/>
+          <circle cx="48" cy="27" r="0.8" fill="#fff"/>
+          <!-- blush -->
+          <ellipse cx="37" cy="30" rx="3" ry="1.5" fill="#ffaaaa" opacity="0.5"/>
+          <ellipse cx="53" cy="30" rx="3" ry="1.5" fill="#ffaaaa" opacity="0.5"/>
+          <!-- body/dress -->
+          <rect x="34" y="37" width="22" height="22" rx="3" fill="#330044"/>
+          <rect x="38" y="37" width="4" height="8" fill="#ffffff" opacity="0.2"/>
+          <!-- lolita collar -->
+          <path d="M37 37 Q45 44 53 37" fill="#fff" opacity="0.4"/>
+          <text x="45" y="66" fill="#cc88ff" font-size="7" text-anchor="middle" font-family="Tahoma">★ gothic ★</text>
+        </svg>
+      </div>
+      <!-- Art card 2: cyberpunk -->
+      <div class="anime-img" style="background:linear-gradient(135deg,#001122 0%,#002244 50%,#001122 100%); border-color:#0044aa;">
+        <svg width="90" height="70" viewBox="0 0 90 70">
+          <rect width="90" height="70" fill="#001122"/>
+          <!-- grid lines -->
+          <line x1="0" y1="50" x2="90" y2="50" stroke="#003355" stroke-width="0.5"/>
+          <line x1="0" y1="60" x2="90" y2="60" stroke="#003355" stroke-width="0.5"/>
+          <line x1="20" y1="50" x2="10" y2="70" stroke="#003355" stroke-width="0.5"/>
+          <line x1="35" y1="50" x2="28" y2="70" stroke="#003355" stroke-width="0.5"/>
+          <line x1="50" y1="50" x2="45" y2="70" stroke="#003355" stroke-width="0.5"/>
+          <line x1="65" y1="50" x2="62" y2="70" stroke="#003355" stroke-width="0.5"/>
+          <line x1="80" y1="50" x2="79" y2="70" stroke="#003355" stroke-width="0.5"/>
+          <!-- buildings -->
+          <rect x="5" y="25" width="12" height="28" fill="#0a1a2a"/>
+          <rect x="7" y="27" width="2" height="2" fill="#ffff00" opacity="0.7"/>
+          <rect x="11" y="27" width="2" height="2" fill="#00ccff" opacity="0.9"/>
+          <rect x="7" y="32" width="2" height="2" fill="#00ccff" opacity="0.7"/>
+          <rect x="11" y="32" width="2" height="2" fill="#ffff00" opacity="0.5"/>
+          <rect x="7" y="37" width="2" height="2" fill="#ff8800" opacity="0.8"/>
+          <rect x="68" y="20" width="16" height="33" fill="#0a1a2a"/>
+          <rect x="70" y="22" width="2" height="2" fill="#00ccff" opacity="0.9"/>
+          <rect x="75" y="22" width="2" height="2" fill="#00ccff" opacity="0.7"/>
+          <rect x="80" y="22" width="2" height="2" fill="#ffff00" opacity="0.8"/>
+          <!-- neon sign -->
+          <rect x="28" y="8" width="34" height="14" rx="2" fill="none" stroke="#ff0088" stroke-width="1"/>
+          <text x="45" y="19" fill="#ff0088" font-size="8" text-anchor="middle" font-family="Courier New">CYBER</text>
+          <!-- glow -->
+          <rect x="28" y="8" width="34" height="14" rx="2" fill="#ff0088" opacity="0.05"/>
+          <text x="45" y="60" fill="#0088ff" font-size="7" text-anchor="middle" font-family="Courier New">// night city</text>
+        </svg>
+      </div>
+      <!-- Art card 3: pixel kawaii -->
+      <div class="anime-img" style="background:linear-gradient(135deg,#ffe0f0 0%,#ffc0e0 50%,#ffaad5 100%); border-color:#ff88cc;">
+        <svg width="90" height="70" viewBox="0 0 90 70" style="image-rendering:pixelated;">
+          <!-- kawaii cat -->
+          <!-- ears -->
+          <rect x="26" y="10" width="8" height="8" fill="#ffaacc"/>
+          <rect x="56" y="10" width="8" height="8" fill="#ffaacc"/>
+          <rect x="28" y="12" width="4" height="4" fill="#ff88bb"/>
+          <rect x="58" y="12" width="4" height="4" fill="#ff88bb"/>
+          <!-- head -->
+          <rect x="22" y="16" width="46" height="36" rx="6" fill="#ffffff"/>
+          <rect x="24" y="18" width="42" height="32" rx="4" fill="#fff0f5"/>
+          <!-- eyes -->
+          <rect x="30" y="26" width="10" height="10" rx="2" fill="#333"/>
+          <rect x="50" y="26" width="10" height="10" rx="2" fill="#333"/>
+          <rect x="31" y="27" width="4" height="4" fill="#fff"/>
+          <rect x="51" y="27" width="4" height="4" fill="#fff"/>
+          <rect x="33" y="29" width="2" height="2" fill="#333"/>
+          <rect x="53" y="29" width="2" height="2" fill="#333"/>
+          <!-- nose -->
+          <rect x="43" y="34" width="4" height="3" rx="1" fill="#ff88aa"/>
+          <!-- mouth -->
+          <rect x="38" y="38" width="4" height="2" fill="#333"/>
+          <rect x="48" y="38" width="4" height="2" fill="#333"/>
+          <rect x="42" y="37" width="6" height="2" fill="#333"/>
+          <!-- blush -->
+          <rect x="24" y="34" width="8" height="4" rx="2" fill="#ffaacc" opacity="0.6"/>
+          <rect x="58" y="34" width="8" height="4" rx="2" fill="#ffaacc" opacity="0.6"/>
+          <!-- whiskers -->
+          <line x1="20" y1="36" x2="30" y2="35" stroke="#ccc" stroke-width="1"/>
+          <line x1="20" y1="38" x2="30" y2="38" stroke="#ccc" stroke-width="1"/>
+          <line x1="60" y1="35" x2="70" y2="36" stroke="#ccc" stroke-width="1"/>
+          <line x1="60" y1="38" x2="70" y2="38" stroke="#ccc" stroke-width="1"/>
+          <text x="45" y="63" fill="#ff66aa" font-size="8" text-anchor="middle" font-family="Tahoma">nyaa~ ♥</text>
+        </svg>
+      </div>
+    </div>
+    <div style="text-align:center; padding:3px;">
+      <a href="#" style="font-size:10px; color:#000080;">[ view full gallery → ]</a>
+    </div>
+  </div>
+<audio id="audioPlayer" preload="metadata"></audio>
+  <!-- MUSIC PLAYER -->
+  <div class="box">
+    <div class="box-title dark">♪ Now Playing</div>
+    <div class="music-player">
+      <div class="music-title">
+        <span style="color:#888; font-size:9px;">▶ </span>
+        <span class="music-scroll">Malice Mizer — Bel Air (Gothic Version) ·· Gackt — 君が追いかけた夢 ·· Dir en grey — Obscure ·· Luna Sea — Storm ··</span>
+      </div>
+      <div class="music-progress"><div class="music-bar"></div></div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="music-time">0:00 / 0:00</div>
+        <div class="music-controls">
+          <button class="music-btn">|◄</button>
+          <button class="music-btn">▐▐</button>
+          <button class="music-btn">►|</button>
+          <button class="music-btn">🔀</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="box">
+    <div class="box-title dark">⚑ Badges &amp; Links</div>
+    <div class="badges">
+      <div class="badge badge-nu">C# Developer</div>
+<div class="badge badge-pink">Angular</div>
+<div class="badge badge-gray">ASP.NET</div>
+<div class="badge badge-xp">SQL Server</div>
+<div class="badge badge-gold">Godot Engine</div>
+<div class="badge badge-red">Git & GitHub</div>
+<div class="badge badge-gray">Open Source</div>
+<div class="badge badge-nu">Full Stack</div>
+<div class="badge badge-pink">Pixel Art Fan</div>
+<div class="badge badge-gold">Retro Computing</div>
+      <div class="badge" style="background:linear-gradient(90deg,#ff6600,#ffcc00); color:#fff; border-color:#cc4400;">Akira!</div>
+      <div class="badge" style="background:#2a0a4a; color:#cc88ff; border-color:#660099;">☽ XDDD ☾</div>
+    </div>
+  </div>
+
+  <!-- MINI JOURNAL -->
+  <div class="box">
+    <div class="box-title gothic">✒ Journal · latest entry</div>
+    <div class="box-inner">
+      <div style="font-size:10px; color:#000080; font-weight:bold; margin-bottom:3px;">Tuesday, Nov 4th 2003 · 11:48 PM</div>
+      <div style="font-size:11px; line-height:1.5; color:#222;">
+        ugh school was so boring today... but!! i found this really old copy of Ghost in the Shell at the manga shop near the station and it was only ¥200!! also started rewatching evangelion again (for the 4th time lol) and i still cry at episode 16 every single time ;;_;; <br>
+        <span style="color:#cc0066;">♥</span> going to post new fanart this weekend~
+      </div>
+      <div style="text-align:right; margin-top:4px;"><a href="#" style="font-size:10px; color:#000080;">[ read more · archive ]</a></div>
+    </div>
+  </div>
+
+</td>
+
+<!-- RIGHT COLUMN -->
+<td class="right-col">
+
+  <!-- CHATBOX -->
+  <div class="box">
+    <div class="box-title gothic">✦ Tagboard</div>
+    <div class="box-inner" style="padding:4px;">
+      <div class="chatbox-msgs">
+        <div class="chat-msg"><span class="chat-name">moonchild:</span> omg ur art is soo pretty!!</div>
+        <div class="chat-msg"><span class="chat-name pink">sakura_xx:</span> haii!! new follower~ ♥</div>
+        <div class="chat-msg"><span class="chat-name purple">deathkitten:</span> where did you get that layout??</div>
+        <div class="chat-msg"><span class="chat-name">evangelion_fan:</span> i love your NGE stuff!!</div>
+        <div class="chat-msg"><span class="chat-name pink">hana_chan:</span> sign mine too!!! &gt;w&lt;</div>
+        <div class="chat-msg"><span class="chat-name">AnonymousXX:</span> ...nice site</div>
+      </div>
+      <div class="chatbox-input">
+        <input type="text" placeholder="say hi~" />
+        <button>go!</button>
+      </div>
+      <div style="font-size:9px; color:#666; margin-top:3px;">no spam · no mean stuff · ty~</div>
+    </div>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="box">
+    <div class="box-title dark">⊕ Site Updates</div>
+    <div>
+      <div class="update-item"><span class="update-date">01.06.2026</span><br>site officially launched!! 🎉</div>
+    </div>
+  </div>
+
+  <!-- NOW PLAYING WIDGET -->
+  <div class="box">
+    <div class="box-title gothic">♫ Recent Tracks</div>
+    <div class="now-playing">
+      <div class="np-track"><b>1.</b> Malice Mizer — Bel Air</div>
+      <div class="np-bar"><div class="np-fill" style="width:60%; background:linear-gradient(90deg,#660099,#aa33ff);"></div></div>
+      <div class="np-track"><b>2.</b> Dir en grey — Obscure</div>
+      <div class="np-bar"><div class="np-fill" style="width:80%; background:linear-gradient(90deg,#333,#666);"></div></div>
+      <div class="np-track"><b>3.</b> Gackt — MIND FOREST</div>
+      <div class="np-bar"><div class="np-fill" style="width:45%; background:linear-gradient(90deg,#003388,#0066cc);"></div></div>
+      <div class="np-track"><b>4.</b> Luna Sea — Storm</div>
+      <div class="np-bar"><div class="np-fill" style="width:20%; background:linear-gradient(90deg,#880000,#cc2222);"></div></div>
+    </div>
+  </div>
+
+  <!-- GOTHIC ICONS -->
+  <div class="box">
+    <div class="box-title gothic">✝ Sanctuary</div>
+    <div class="gothic-icons">
+      <div class="goth-icon">✝</div>
+      <div class="goth-icon">☽</div>
+      <div class="goth-icon">✦</div>
+      <div class="goth-icon">⚜</div>
+      <div class="goth-icon">☾</div>
+      <div class="goth-icon">⚔</div>
+      <div class="goth-icon">✞</div>
+      <div class="goth-icon">❧</div>
+    </div>
+    <div style="text-align:center; font-size:9px; color:#4a0a4a; padding:3px; font-family:'UnifrakturMaguntia',cursive; font-size:13px;">~ per aspera ad astra ~</div>
+  </div>
+
+  <!-- ONLINE FRIENDS -->
+  <div class="box">
+    <div class="box-title dark">◉ Online Friends</div>
+    <div class="box-inner" style="font-size:10px; padding:4px; line-height:1.8;">
+      <div><span style="color:#00aa00;">●</span> moonchild_666</div>
+      <div><span style="color:#00aa00;">●</span> sakura_hana</div>
+      <div><span style="color:#888;">○</span> deathkitten_x</div>
+      <div><span style="color:#888;">○</span> animelover03</div>
+      <div><span style="color:#888;">○</span> shinji_ikari_fan</div>
+    </div>
+  </div>
+
+  <!-- CLIQUES -->
+  <div class="box">
+    <div class="box-title gothic">✦ Cliques</div>
+    <div class="box-inner" style="font-size:9px; line-height:1.8; text-align:center; color:#333;">
+      <div>⚜ I ♥ Gothic Lolita</div>
+      <div>✝ Evangelion Fan</div>
+      <div>☽ Lunatic Moon Clique</div>
+      <div>♠ J-Rock Addicts</div>
+      <div>✦ Old Web Lovers</div>
+    </div>
+  </div>
+
+</td>
+</tr>
+</table>
+</div>
+<!-- FOOTER -->
+<div style="text-align:center; font-size:9px; color:#666; padding:6px 0 2px; border-top:1px solid #aaa; margin-top:3px;">
+  © 2003 nekochan · all original content · please don't steal · made with ♥ and too much instant ramen<br>
+  <span style="color:#000080;">no unauthorized reproduction · back to top · email me</span>
+</div>
+<script>
+const starDiv = document.getElementById('stars');
+for(let i=0;i<40;i++){
+  const s = document.createElement('div');
+  const size = Math.random()*2+0.5;
+  s.style.cssText=`position:absolute;background:#fff;border-radius:50%;width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*80}%;opacity:${Math.random()*0.6+0.2}`;
+  if(Math.random()>0.7){ s.style.animation=`blink ${1+Math.random()*2}s step-end infinite`; }
+  starDiv.appendChild(s);
+}
+
+function updateClock(){
+  const now = new Date();
+  document.getElementById('clock').textContent=now.toLocaleTimeString('en-US',{hour12:false});
+}
+updateClock();
+setInterval(updateClock,1000);
+
+let count = 4721;
+setInterval(()=>{ count++; document.getElementById('counter').textContent=String(count).padStart(6,'0'); },8000);
+
+const tracks = [
+  {
+    title: 'Nico Tape 01 - audioejemplo.mp3',
+    src: '../TimeMachine/messages/audioejemplo.mp3'
+  },
+  {
+    title: 'Nico Tape 02 - audio2.mp3',
+    src: '../TimeMachine/messages-2/audio2.mp3'
+  }
+];
+
+const audioPlayer = document.getElementById('audioPlayer');
+const musicPlayer = document.querySelector('.music-player');
+const musicTitle = musicPlayer.querySelector('.music-scroll');
+const musicBar = musicPlayer.querySelector('.music-bar');
+const musicProgress = musicPlayer.querySelector('.music-progress');
+const musicTime = musicPlayer.querySelector('.music-time');
+const musicButtons = musicPlayer.querySelectorAll('.music-btn');
+const [prevButton, playPauseButton, nextButton, shuffleButton] = musicButtons;
+let currentTrack = 0;
+let shuffleMode = false;
+
+prevButton.textContent = '|<';
+prevButton.title = 'Anterior';
+playPauseButton.textContent = 'PLAY';
+playPauseButton.title = 'Reproducir';
+nextButton.textContent = '>|';
+nextButton.title = 'Siguiente';
+shuffleButton.textContent = 'SHUF';
+shuffleButton.title = 'Aleatorio';
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return '0:00';
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return `${minutes}:${remainingSeconds}`;
+}
+
+function updateMusicTime() {
+  const current = audioPlayer.currentTime || 0;
+  const duration = audioPlayer.duration || 0;
+  const progress = duration ? (current / duration) * 100 : 0;
+
+  musicBar.style.width = `${progress}%`;
+  musicTime.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+}
+
+function setPlayButtonState() {
+  playPauseButton.textContent = audioPlayer.paused ? 'PLAY' : 'PAUSE';
+  playPauseButton.title = audioPlayer.paused ? 'Reproducir' : 'Pausar';
+}
+
+function loadTrack(index, shouldPlay = false) {
+  currentTrack = (index + tracks.length) % tracks.length;
+  const track = tracks[currentTrack];
+
+  audioPlayer.src = track.src;
+  musicTitle.textContent = track.title;
+  updateMusicTime();
+
+  if (shouldPlay) {
+    audioPlayer.play().catch(() => {
+      setPlayButtonState();
+    });
+  }
+}
+
+function getNextTrackIndex() {
+  if (!shuffleMode || tracks.length < 2) return currentTrack + 1;
+
+  let nextTrack = currentTrack;
+  while (nextTrack === currentTrack) {
+    nextTrack = Math.floor(Math.random() * tracks.length);
+  }
+  return nextTrack;
+}
+
+function playNextTrack(shouldPlay = !audioPlayer.paused) {
+  loadTrack(getNextTrackIndex(), shouldPlay);
+}
+
+prevButton.addEventListener('click', () => {
+  if (audioPlayer.currentTime > 3) {
+    audioPlayer.currentTime = 0;
+    return;
+  }
+
+  loadTrack(currentTrack - 1, !audioPlayer.paused);
+});
+
+playPauseButton.addEventListener('click', () => {
+  if (audioPlayer.paused) {
+    audioPlayer.play().catch(() => {
+      setPlayButtonState();
+    });
+  } else {
+    audioPlayer.pause();
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  playNextTrack(true);
+});
+
+shuffleButton.addEventListener('click', () => {
+  shuffleMode = !shuffleMode;
+  shuffleButton.classList.toggle('is-active', shuffleMode);
+  shuffleButton.title = shuffleMode ? 'Aleatorio activado' : 'Aleatorio';
+});
+
+musicProgress.addEventListener('click', (event) => {
+  if (!audioPlayer.duration) return;
+
+  const rect = musicProgress.getBoundingClientRect();
+  const ratio = (event.clientX - rect.left) / rect.width;
+  audioPlayer.currentTime = Math.min(Math.max(ratio, 0), 1) * audioPlayer.duration;
+});
+
+audioPlayer.addEventListener('loadedmetadata', updateMusicTime);
+audioPlayer.addEventListener('timeupdate', updateMusicTime);
+audioPlayer.addEventListener('play', setPlayButtonState);
+audioPlayer.addEventListener('pause', setPlayButtonState);
+audioPlayer.addEventListener('ended', () => playNextTrack(true));
+audioPlayer.addEventListener('error', () => {
+  musicTitle.textContent = `No se pudo cargar: ${tracks[currentTrack].title}`;
+  musicBar.style.width = '0%';
+  setPlayButtonState();
+});
+
+loadTrack(0);
+</script>
