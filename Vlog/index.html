@@ -138,6 +138,10 @@ body {
   background: linear-gradient(180deg, #d0ccc4 0%, #b0acA4 100%);
   border: 2px inset #aaa;
 }
+.nav-btn.active {
+  background: linear-gradient(180deg, #b0acA4 0%, #d0ccc4 100%);
+  border: 2px inset #888;
+}
 .nav-btn::before { content: '► '; font-size: 9px; color: #666; }
 
 .gothic-ornament {
@@ -409,15 +413,15 @@ body {
     <div class="box-title gothic">✝ Navigation ✝</div>
     <div class="box-inner" style="padding:4px 3px;">
       <div class="gothic-ornament">❦ ✦ ❦</div>
-      <a href="#" class="nav-btn">Home</a>
-<a href="#" class="nav-btn">About</a>
-<a href="#" class="nav-btn">Projects</a>
-<a href="#" class="nav-btn">Devlog</a>
-<a href="#" class="nav-btn">Godot</a>
-<a href="#" class="nav-btn">Tutorials</a>
+      <a href="?page=home" class="nav-btn">Home</a>
+<a href="?page=about" class="nav-btn">About</a>
+<a href="?page=projects" class="nav-btn">Projects</a>
+<a href="?page=devlog" class="nav-btn">Devlog</a>
+<a href="?page=godot" class="nav-btn">Godot</a>
+<a href="?page=tutorials" class="nav-btn">Tutorials</a>
 <a href="../index.html" class="nav-btn">Portfolio</a>
-<a href="#" class="nav-btn">Notes</a>
-<a href="#" class="nav-btn">Contact</a>
+<a href="?page=notes" class="nav-btn">Notes</a>
+<a href="?page=contact" class="nav-btn">Contact</a>
       <div class="gothic-ornament" style="margin-top:3px;">❦ ✦ ❦</div>
     </div>
   </div>
@@ -467,225 +471,7 @@ body {
 
 <!-- CENTER COLUMN -->
 <td class="center-col">
-
-  <!-- WELCOME BOX -->
-  <div class="box">
-  <div class="box-title">
-    <span>✦</span> Welcome · Bienvenido
-  </div>
-  <div class="box-inner">
-    <div style="display:flex; gap:6px; align-items:flex-start;">
-
-      <img src="perfil.png" width="52" height="52"
-           style="border:2px inset #999;">
-
-<div class="welcome-text">
-    <b>Hello!</b> I'm <b>Nicolás</b>, a Full Stack Developer from Argentina.
-    <br><br>
-
-    Most of my work revolves around <b>.NET</b>, <b>Angular</b>, and databases,
-    but I also enjoy building games with <b>Godot</b> and experimenting with
-    new ideas whenever I can.
-    <br><br>
-
-    This little website is my place on the internet where I share personal
-    projects, development logs, tutorials, technical notes, and whatever
-    interesting things I'm currently learning or working on.
-    <br><br>
-
-    Feel free to look around and check out my projects.
-    Thanks for stopping by!
-</div>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;">
-      <span style="font-size:10px; color:#666;">📍 Córdoba, Argentina</span> ·
-      <span style="font-size:10px; color:#666;">💻 .NET · Angular · Godot</span> ·
-      <span style="font-size:10px; color:#666;">🎮 Indie Game Dev</span>
-    </div>
-  </div>
-</div>
-
-  <!-- ART PREVIEW -->
-  <div class="box">
-    <div class="box-title gothic">✝ Art Gallery · recent uploads</div>
-    <div class="anime-grid">
-      <!-- Art card 1: anime girl -->
-      <div class="anime-img" style="background:linear-gradient(135deg,#1a0530 0%,#3a1060 50%,#1a0530 100%); border-color:#6a0a6a;">
-        <svg width="90" height="70" viewBox="0 0 90 70">
-          <!-- bg stars -->
-          <circle cx="15" cy="10" r="1" fill="#fff" opacity="0.5"/>
-          <circle cx="75" cy="20" r="0.8" fill="#fff" opacity="0.6"/>
-          <circle cx="60" cy="8" r="1.2" fill="#fff" opacity="0.4"/>
-          <!-- moon -->
-          <circle cx="72" cy="12" r="8" fill="#ffeeaa" opacity="0.7"/>
-          <circle cx="75" cy="10" r="7" fill="#3a1060" opacity="0.8"/>
-          <!-- figure -->
-          <ellipse cx="45" cy="28" rx="8" ry="9" fill="#f0c8a0"/>
-          <!-- hair -->
-          <ellipse cx="45" cy="22" rx="10" ry="8" fill="#1a0520"/>
-          <rect x="35" y="22" width="5" height="18" fill="#1a0520"/>
-          <rect x="50" y="22" width="5" height="18" fill="#1a0520"/>
-          <!-- eyes -->
-          <ellipse cx="41" cy="28" rx="3" ry="3.5" fill="#6600aa"/>
-          <ellipse cx="49" cy="28" rx="3" ry="3.5" fill="#6600aa"/>
-          <ellipse cx="41" cy="28" rx="2" ry="2.5" fill="#220033"/>
-          <ellipse cx="49" cy="28" rx="2" ry="2.5" fill="#220033"/>
-          <circle cx="40" cy="27" r="0.8" fill="#fff"/>
-          <circle cx="48" cy="27" r="0.8" fill="#fff"/>
-          <!-- blush -->
-          <ellipse cx="37" cy="30" rx="3" ry="1.5" fill="#ffaaaa" opacity="0.5"/>
-          <ellipse cx="53" cy="30" rx="3" ry="1.5" fill="#ffaaaa" opacity="0.5"/>
-          <!-- body/dress -->
-          <rect x="34" y="37" width="22" height="22" rx="3" fill="#330044"/>
-          <rect x="38" y="37" width="4" height="8" fill="#ffffff" opacity="0.2"/>
-          <!-- lolita collar -->
-          <path d="M37 37 Q45 44 53 37" fill="#fff" opacity="0.4"/>
-          <text x="45" y="66" fill="#cc88ff" font-size="7" text-anchor="middle" font-family="Tahoma">★ gothic ★</text>
-        </svg>
-      </div>
-      <!-- Art card 2: cyberpunk -->
-      <div class="anime-img" style="background:linear-gradient(135deg,#001122 0%,#002244 50%,#001122 100%); border-color:#0044aa;">
-        <svg width="90" height="70" viewBox="0 0 90 70">
-          <rect width="90" height="70" fill="#001122"/>
-          <!-- grid lines -->
-          <line x1="0" y1="50" x2="90" y2="50" stroke="#003355" stroke-width="0.5"/>
-          <line x1="0" y1="60" x2="90" y2="60" stroke="#003355" stroke-width="0.5"/>
-          <line x1="20" y1="50" x2="10" y2="70" stroke="#003355" stroke-width="0.5"/>
-          <line x1="35" y1="50" x2="28" y2="70" stroke="#003355" stroke-width="0.5"/>
-          <line x1="50" y1="50" x2="45" y2="70" stroke="#003355" stroke-width="0.5"/>
-          <line x1="65" y1="50" x2="62" y2="70" stroke="#003355" stroke-width="0.5"/>
-          <line x1="80" y1="50" x2="79" y2="70" stroke="#003355" stroke-width="0.5"/>
-          <!-- buildings -->
-          <rect x="5" y="25" width="12" height="28" fill="#0a1a2a"/>
-          <rect x="7" y="27" width="2" height="2" fill="#ffff00" opacity="0.7"/>
-          <rect x="11" y="27" width="2" height="2" fill="#00ccff" opacity="0.9"/>
-          <rect x="7" y="32" width="2" height="2" fill="#00ccff" opacity="0.7"/>
-          <rect x="11" y="32" width="2" height="2" fill="#ffff00" opacity="0.5"/>
-          <rect x="7" y="37" width="2" height="2" fill="#ff8800" opacity="0.8"/>
-          <rect x="68" y="20" width="16" height="33" fill="#0a1a2a"/>
-          <rect x="70" y="22" width="2" height="2" fill="#00ccff" opacity="0.9"/>
-          <rect x="75" y="22" width="2" height="2" fill="#00ccff" opacity="0.7"/>
-          <rect x="80" y="22" width="2" height="2" fill="#ffff00" opacity="0.8"/>
-          <!-- neon sign -->
-          <rect x="28" y="8" width="34" height="14" rx="2" fill="none" stroke="#ff0088" stroke-width="1"/>
-          <text x="45" y="19" fill="#ff0088" font-size="8" text-anchor="middle" font-family="Courier New">CYBER</text>
-          <!-- glow -->
-          <rect x="28" y="8" width="34" height="14" rx="2" fill="#ff0088" opacity="0.05"/>
-          <text x="45" y="60" fill="#0088ff" font-size="7" text-anchor="middle" font-family="Courier New">// night city</text>
-        </svg>
-      </div>
-      <!-- Art card 3: pixel kawaii -->
-      <div class="anime-img" style="background:linear-gradient(135deg,#ffe0f0 0%,#ffc0e0 50%,#ffaad5 100%); border-color:#ff88cc;">
-        <svg width="90" height="70" viewBox="0 0 90 70" style="image-rendering:pixelated;">
-          <!-- kawaii cat -->
-          <!-- ears -->
-          <rect x="26" y="10" width="8" height="8" fill="#ffaacc"/>
-          <rect x="56" y="10" width="8" height="8" fill="#ffaacc"/>
-          <rect x="28" y="12" width="4" height="4" fill="#ff88bb"/>
-          <rect x="58" y="12" width="4" height="4" fill="#ff88bb"/>
-          <!-- head -->
-          <rect x="22" y="16" width="46" height="36" rx="6" fill="#ffffff"/>
-          <rect x="24" y="18" width="42" height="32" rx="4" fill="#fff0f5"/>
-          <!-- eyes -->
-          <rect x="30" y="26" width="10" height="10" rx="2" fill="#333"/>
-          <rect x="50" y="26" width="10" height="10" rx="2" fill="#333"/>
-          <rect x="31" y="27" width="4" height="4" fill="#fff"/>
-          <rect x="51" y="27" width="4" height="4" fill="#fff"/>
-          <rect x="33" y="29" width="2" height="2" fill="#333"/>
-          <rect x="53" y="29" width="2" height="2" fill="#333"/>
-          <!-- nose -->
-          <rect x="43" y="34" width="4" height="3" rx="1" fill="#ff88aa"/>
-          <!-- mouth -->
-          <rect x="38" y="38" width="4" height="2" fill="#333"/>
-          <rect x="48" y="38" width="4" height="2" fill="#333"/>
-          <rect x="42" y="37" width="6" height="2" fill="#333"/>
-          <!-- blush -->
-          <rect x="24" y="34" width="8" height="4" rx="2" fill="#ffaacc" opacity="0.6"/>
-          <rect x="58" y="34" width="8" height="4" rx="2" fill="#ffaacc" opacity="0.6"/>
-          <!-- whiskers -->
-          <line x1="20" y1="36" x2="30" y2="35" stroke="#ccc" stroke-width="1"/>
-          <line x1="20" y1="38" x2="30" y2="38" stroke="#ccc" stroke-width="1"/>
-          <line x1="60" y1="35" x2="70" y2="36" stroke="#ccc" stroke-width="1"/>
-          <line x1="60" y1="38" x2="70" y2="38" stroke="#ccc" stroke-width="1"/>
-          <text x="45" y="63" fill="#ff66aa" font-size="8" text-anchor="middle" font-family="Tahoma">nyaa~ ♥</text>
-        </svg>
-      </div>
-    </div>
-    <div style="text-align:center; padding:3px;">
-      <a href="#" style="font-size:10px; color:#000080;">[ view full gallery → ]</a>
-    </div>
-  </div>
-<audio id="audioPlayer" preload="metadata"></audio>
-  <!-- MUSIC PLAYER -->
-  <div class="box">
-    <div class="box-title dark">♪ Now Playing</div>
-    <div class="music-player">
-      <div class="music-title">
-        <span style="color:#888; font-size:9px;">▶ </span>
-        <span class="music-scroll">Malice Mizer — Bel Air (Gothic Version) ·· Gackt — 君が追いかけた夢 ·· Dir en grey — Obscure ·· Luna Sea — Storm ··</span>
-      </div>
-      <div class="music-progress"><div class="music-bar"></div></div>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div class="music-time">0:00 / 0:00</div>
-        <div class="music-controls">
-          <button class="music-btn">|◄</button>
-          <button class="music-btn">▐▐</button>
-          <button class="music-btn">►|</button>
-          <button class="music-btn">🔀</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BADGES -->
-  <div class="box">
-    <div class="box-title dark">⚑ Badges &amp; Links</div>
-    <div class="badges">
-      <div class="badge badge-nu">C# Developer</div>
-<div class="badge badge-pink">Angular</div>
-<div class="badge badge-gray">ASP.NET</div>
-<div class="badge badge-xp">SQL Server</div>
-<div class="badge badge-gold">Godot Engine</div>
-<div class="badge badge-red">Git & GitHub</div>
-<div class="badge badge-gray">Open Source</div>
-<div class="badge badge-nu">Full Stack</div>
-<div class="badge badge-pink">Pixel Art Fan</div>
-<div class="badge badge-gold">Retro Computing</div>
-      <div class="badge" style="background:linear-gradient(90deg,#ff6600,#ffcc00); color:#fff; border-color:#cc4400;">Akira!</div>
-      <div class="badge" style="background:#2a0a4a; color:#cc88ff; border-color:#660099;">☽ XDDD ☾</div>
-    </div>
-  </div>
-
-  <!-- MINI JOURNAL -->
-  <div class="box">
-  <div class="box-title gothic">✒ Journal · latest entry</div>
-  <div class="box-inner">
-    <div style="font-size:10px; color:#000080; font-weight:bold; margin-bottom:3px;">
-      June 1st, 2026 · 12:34 AM
-    </div>
-
-    <div style="font-size:11px; line-height:1.5; color:#222;">
-      I've been reading <i>Rayuela</i> by Julio Cortázar lately, and honestly, it has completely blown my mind. Every few pages I find myself stopping just to think about what I read. The way Cortázar plays with language, ideas, and structure feels unlike anything else I've encountered before.
-      <br><br>
-
-      Sometimes <i>Rayuela</i> feels more like wandering through someone's thoughts than reading a traditional novel, and that's exactly what makes it so fascinating. It's confusing, beautiful, strange, and brilliant all at the same time.
-      <br><br>
-
-      Definitely one of the most memorable books I've picked up in years. 📖
-    </div>
-
-    <div style="text-align:right; margin-top:4px;">
-      <a href="#" style="font-size:10px; color:#000080;">
-        [ read more · archive ]
-      </a>
-    </div>
-  </div>
-</div>
-
+  <div id="content"></div>
 </td>
 
 <!-- RIGHT COLUMN -->
@@ -946,3 +732,6 @@ audioPlayer.addEventListener('error', () => {
 
 loadTrack(0);
 </script>
+
+<!-- Dynamic page router -->
+<script src="router.js" defer></script>
