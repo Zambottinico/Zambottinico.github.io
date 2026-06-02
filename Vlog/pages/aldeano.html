@@ -334,7 +334,7 @@
       <span class="pane-title">EDITOR.mhh</span>
       <span id="line-count" style="font-size:.5rem;font-family:'Press Start 2P',monospace">0 líneas</span>
     </div>
-    <textarea id="code" placeholder="mhh mhh? mHH...&#10;&#10;Escribe tu código aldeano aquí.&#10;Solo se permiten variaciones de mhh." spellcheck="false"></textarea>
+    <textarea id="code" placeholder="mhh mhh? mHH...&#10;&#10;Escribe tu código HmmScript aquí.&#10;Solo se permiten variaciones de mhh." spellcheck="false"></textarea>
     <div class="btn-row">
       <button class="btn-run" onclick="compilar()">▶ COMPILAR</button>
       <button class="btn-example" onclick="cargarEjemplo()">DEMO</button>
@@ -362,7 +362,7 @@
       <div class="dot dot-y"></div>
       <div class="dot dot-y"></div>
       <div class="dot dot-y"></div>
-      <span class="pane-title">📖 REFERENCIA DEL IDIOMA ALDEANO</span>
+      <span class="pane-title">📖 REFERENCIA DEL HmmScript</span>
     </div>
     <div class="docs-body" id="docs"></div>
   </div>
@@ -573,7 +573,7 @@ function compilar() {
   box.innerHTML = '';
 
   if (!src) {
-    box.innerHTML = '<span class="warn">⚠ No hay código que compilar. ¡Escribe algo, aldeano!</span>';
+    box.innerHTML = '<span class="warn">⚠ No hay código que compilar. ¡Escribe algo, alcornoque!</span>';
     setStatus('Sin código');
     return;
   }
@@ -707,7 +707,7 @@ function ejecutar(tokens) {
       }
       case 'DIV': {
         const b = pop(), a = pop();
-        if (b === 0) throw new Error('División por cero — ¡ni el aldeano lo hace!');
+        if (b === 0) throw new Error('No se puede dividir por cero, ¡el aldeano se niega a hacerlo!');
         stack.push(Math.floor(a / b));
         break;
       }
