@@ -479,6 +479,18 @@ function setStatus(msg) {
   document.getElementById('status-msg').textContent = msg;
 }
 
+const audioSuccess = new Audio('Sonido de hmm de los aldeanos.mp3');
+audioSuccess.preload = 'auto';
+const audioError = new Audio('sonido de aldeano golpeado.mp3');
+audioError.preload = 'auto';
+
+function playSound(audio) {
+  audio.currentTime = 0;
+  audio.play().catch(() => {
+    // El navegador puede bloquear reproducción automática si no hay interacción previa.
+  });
+}
+
 function clearOutput() {
   document.getElementById('output').innerHTML = '<span class="prompt">// Consola limpiada. mhh!</span>';
 }
@@ -575,6 +587,7 @@ function compilar() {
   if (!src) {
     box.innerHTML = '<span class="warn">⚠ No hay código que compilar. ¡Escribe algo, alcornoque!</span>';
     setStatus('Sin código');
+    playSound(audioError);
     return;
   }
 
@@ -582,6 +595,7 @@ function compilar() {
   if (result.error) {
     box.innerHTML = `<span class="err">❌ ERROR LÉXICO: ${result.error}</span>`;
     setStatus('Error léxico');
+    playSound(audioError);
     return;
   }
 
@@ -596,9 +610,11 @@ function compilar() {
     }
     box.innerHTML += `\n<span class="ok">── ✓ Ejecución completada ──</span>`;
     setStatus(`OK — ${tokens.length} tokens ejecutados`);
+    playSound(audioSuccess);
   } catch(e) {
     box.innerHTML += `\n<span class="err">❌ ERROR EN TIEMPO DE EJECUCIÓN: ${e.message}</span>`;
     setStatus('Error de ejecución');
+    playSound(audioError);
   }
 
   box.scrollTop = box.scrollHeight;
